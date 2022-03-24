@@ -1,0 +1,906 @@
+{
+	"tables": {
+		"70822e71-48bc-455b-bedb-87e2d0eda03c": {
+			"id": "70822e71-48bc-455b-bedb-87e2d0eda03c",
+			"visible": true,
+			"name": "Job",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "2f8a1f0c-fdbe-414d-9473-a52fda85485f",
+					"name": "_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": true,
+					"nn": true,
+					"comment": "",
+					"defaultvalue": "",
+					"data": ""
+				},
+				{
+					"id": "ae09a64e-ea21-4ab0-b115-f400bd865ccc",
+					"name": "position",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "29a0aa1d-3788-46c4-b9e8-8abf051b0660",
+					"name": "location",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "f8316662-3bd1-422f-b464-48c43ea4b0a3",
+					"name": "skills",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": true,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "9ad44325-43c0-430f-88e5-de98da4db464",
+					"name": "languages",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": true,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "9e917f5c-4514-47e2-b514-47a6f84d8c7d",
+					"name": "description",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "c41a41cb-abf3-4972-9b27-a73e58b68419",
+					"name": "matches",
+					"datatype": "1c1c6831-371b-4a60-b4b2-159d23386fe2",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": true,
+					"enum": "",
+					"validate": "",
+					"pattern": false
+				}
+			],
+			"relations": [],
+			"lines": [
+				"0c273860-ae44-4558-9e73-c3ad187b0ce7",
+				"d9f577f7-f88e-4678-92ac-795808e9eb15"
+			],
+			"keys": [
+				{
+					"id": "bb5ea32e-bb34-4d11-b202-5558e33adac9",
+					"name": "Primary key",
+					"isPk": true,
+					"using": "na",
+					"cols": [
+						{
+							"id": "30abbfaf-267d-4f79-a529-aba14dafa20e",
+							"colid": "2f8a1f0c-fdbe-414d-9473-a52fda85485f"
+						}
+					]
+				}
+			],
+			"indexes": [],
+			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"internalColumnIdRef": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": ""
+		},
+		"1c1c6831-371b-4a60-b4b2-159d23386fe2": {
+			"id": "1c1c6831-371b-4a60-b4b2-159d23386fe2",
+			"visible": true,
+			"name": "match",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "d5b68585-c93a-4ace-b499-3fd57d53fca8",
+					"name": "score",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "82111821-af58-4d79-a470-4d4831b0f59e",
+					"name": "Resumes",
+					"datatype": "objectId",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"fk": true,
+					"ref": "Resumes"
+				}
+			],
+			"relations": [
+				"fe7de4be-193b-4d2d-ae68-956a0390e3ca"
+			],
+			"lines": [
+				"0c273860-ae44-4558-9e73-c3ad187b0ce7"
+			],
+			"keys": [
+				{
+					"id": "d7b37db5-e852-494d-b047-d3a94781b71d",
+					"name": "Primary key",
+					"isPk": true,
+					"using": "na",
+					"cols": []
+				}
+			],
+			"indexes": [],
+			"embeddable": true,
+			"generate": true,
+			"generateCustomCode": true,
+			"internalColumnIdRef": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": ""
+		},
+		"52b9183c-3813-4beb-8fce-4bb34e0c406e": {
+			"id": "52b9183c-3813-4beb-8fce-4bb34e0c406e",
+			"visible": false,
+			"name": "experience",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "ce6f7a19-515c-441a-bfb9-2ecbc36c1f6c",
+					"name": "position",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "cb26d650-1491-453f-82cf-d3718f6ed7fd",
+					"name": "duration",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "5381efb4-7d98-47e1-8747-204735bf0485",
+					"name": "company",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "d982d46c-e01c-49d6-8bd8-22e1059b47ec",
+					"name": "details",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				}
+			],
+			"relations": [],
+			"lines": [],
+			"keys": [
+				{
+					"id": "bba9b485-7f65-404c-b80d-c2db850fc400",
+					"name": "Primary key",
+					"isPk": true,
+					"using": "na",
+					"cols": []
+				}
+			],
+			"indexes": [],
+			"embeddable": true,
+			"generate": true,
+			"generateCustomCode": true,
+			"internalColumnIdRef": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": ""
+		},
+		"f8db035c-f796-42c8-a293-010d3abb064d": {
+			"id": "f8db035c-f796-42c8-a293-010d3abb064d",
+			"visible": true,
+			"name": "Resumes",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "7bf3a8a8-ba93-4227-bdd4-8129e54cd338",
+					"name": "_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": true,
+					"nn": true,
+					"comment": "",
+					"defaultvalue": "",
+					"data": ""
+				},
+				{
+					"id": "5cc9702e-5b89-4e42-ba62-24b227f8b771",
+					"name": "name",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "02e80432-bfe4-4444-b023-bc79ac8822a9",
+					"name": "email",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": "",
+					"pattern": false
+				},
+				{
+					"id": "9e2fe54d-83c3-4142-8d9a-ef9e3a2e90ae",
+					"name": "phone",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "ff342d91-3cba-4fda-80e7-3796a7e338e2",
+					"name": "skills",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": true,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "a018e056-bb5c-4c89-be7c-4cef0c654f70",
+					"name": "category",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "c5a717bc-6004-4e9a-b9c2-786e851713ca",
+					"name": "education",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "923e8dee-c62c-4069-9699-a1edbf546394",
+					"name": "company",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "7145ad51-ae82-4282-9a49-59db47361ec8",
+					"name": "languages",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": true,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "370aa6e1-42a8-455e-a084-da6a79c7759a",
+					"name": "location",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "ce524bbd-0f8e-4650-8d63-c544f4312985",
+					"name": "url",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "2c5cb952-96ef-4098-b1a5-0f94821f8d3f",
+					"name": "experience",
+					"datatype": "52b9183c-3813-4beb-8fce-4bb34e0c406e",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": true,
+					"enum": "",
+					"validate": ""
+				}
+			],
+			"relations": [
+				"fe7de4be-193b-4d2d-ae68-956a0390e3ca"
+			],
+			"lines": [],
+			"keys": [
+				{
+					"id": "cc4d6b78-ed4c-4727-bcd5-8721df3b9c25",
+					"name": "Primary key",
+					"isPk": true,
+					"using": "na",
+					"cols": [
+						{
+							"id": "3b2e8fa8-9b99-43a8-a758-b608002ba81b",
+							"colid": "7bf3a8a8-ba93-4227-bdd4-8129e54cd338"
+						}
+					]
+				}
+			],
+			"indexes": [],
+			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"internalColumnIdRef": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": ""
+		},
+		"3b78d2c0-657e-4fb0-b85a-636d7fe807dd": {
+			"id": "3b78d2c0-657e-4fb0-b85a-636d7fe807dd",
+			"visible": false,
+			"name": "Job",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "423f7dc4-d7e0-4323-9c71-131548ad190b",
+					"name": "position",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "c80ba168-d998-455b-b831-d9a65390f256",
+					"name": "location",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "cd5a02da-fe18-4580-82e8-b16aef38cfe1",
+					"name": "skills",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": true,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "352733fc-874a-4146-a6b9-8ebdd1f70c39",
+					"name": "languages",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": true,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "a36beaa0-8ad5-4556-bcad-e2a9591c6f85",
+					"name": "description",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "2a030625-f79e-45c3-879c-878dc150c00f",
+					"name": "matches",
+					"datatype": "1c1c6831-371b-4a60-b4b2-159d23386fe2",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": true,
+					"enum": "",
+					"validate": ""
+				}
+			],
+			"relations": [],
+			"lines": [],
+			"keys": [
+				{
+					"id": "78c29a58-84ae-4987-b491-e81d868f0258",
+					"name": "Primary key",
+					"isPk": true,
+					"using": "na",
+					"cols": []
+				}
+			],
+			"indexes": [],
+			"embeddable": true,
+			"generate": true,
+			"generateCustomCode": true,
+			"internalColumnIdRef": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": ""
+		},
+		"112f7d4d-edd1-4523-a189-29e7bea67a5f": {
+			"id": "112f7d4d-edd1-4523-a189-29e7bea67a5f",
+			"visible": true,
+			"name": "Project",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "b54b13a9-8701-4c31-879d-6db97974b47e",
+					"name": "_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": true,
+					"nn": true,
+					"comment": "",
+					"defaultvalue": "",
+					"data": ""
+				},
+				{
+					"id": "c7ad7d9e-9789-4e4d-8568-29002c689a48",
+					"name": "title",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "3331b47c-c03a-4fff-9f9b-02753a37791f",
+					"name": "client",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "1744a1bf-35d5-4381-b893-b2b12479adb2",
+					"name": "manager",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "008858f2-1b42-47f0-b5ca-e043fdd4c7e8",
+					"name": "date_start",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "019fc17f-1ce6-4ec6-be09-cb14936655b3",
+					"name": "date finish",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "ab05a80c-8af4-4739-a17b-89dcb0796b3c",
+					"name": "staffing",
+					"datatype": "3b78d2c0-657e-4fb0-b85a-636d7fe807dd",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": true,
+					"enum": "",
+					"validate": ""
+				}
+			],
+			"relations": [],
+			"lines": [
+				"d9f577f7-f88e-4678-92ac-795808e9eb15"
+			],
+			"keys": [
+				{
+					"id": "0bdf9f47-5fb6-4cfa-b0a5-37895b7d2243",
+					"name": "Primary key",
+					"isPk": true,
+					"using": "na",
+					"cols": [
+						{
+							"id": "4ad23cd4-cb0d-4b5e-bc6a-cd0a10c86f22",
+							"colid": "b54b13a9-8701-4c31-879d-6db97974b47e"
+						}
+					]
+				}
+			],
+			"indexes": [],
+			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"internalColumnIdRef": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": ""
+		}
+	},
+	"relations": {
+		"fe7de4be-193b-4d2d-ae68-956a0390e3ca": {
+			"id": "fe7de4be-193b-4d2d-ae68-956a0390e3ca",
+			"visible": true,
+			"name": "Resumes_match",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "cc4d6b78-ed4c-4727-bcd5-8721df3b9c25",
+			"parent": "f8db035c-f796-42c8-a293-010d3abb064d",
+			"child": "1c1c6831-371b-4a60-b4b2-159d23386fe2",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "6b294e3c-9c8e-4aa9-bd9a-ba1a8250f2ed",
+					"parentcol": "7bf3a8a8-ba93-4227-bdd4-8129e54cd338",
+					"childcol": "82111821-af58-4d79-a470-4d4831b0f59e"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true
+		}
+	},
+	"notes": {},
+	"lines": {
+		"0c273860-ae44-4558-9e73-c3ad187b0ce7": {
+			"id": "0c273860-ae44-4558-9e73-c3ad187b0ce7",
+			"visible": true,
+			"name": "match-JobOffer",
+			"desc": "",
+			"style": "solid",
+			"parent": "1c1c6831-371b-4a60-b4b2-159d23386fe2",
+			"child": "70822e71-48bc-455b-bedb-87e2d0eda03c",
+			"lineColor": "transparent",
+			"markerStart": "none",
+			"markerEnd": "arrowEnd",
+			"linegraphics": "basic",
+			"generate": true
+		},
+		"d9f577f7-f88e-4678-92ac-795808e9eb15": {
+			"id": "d9f577f7-f88e-4678-92ac-795808e9eb15",
+			"visible": true,
+			"name": "Job-Project",
+			"desc": "",
+			"style": "solid",
+			"parent": "70822e71-48bc-455b-bedb-87e2d0eda03c",
+			"child": "112f7d4d-edd1-4523-a189-29e7bea67a5f",
+			"lineColor": "transparent",
+			"markerStart": "none",
+			"markerEnd": "arrowEnd",
+			"linegraphics": "basic",
+			"generate": true
+		}
+	},
+	"model": {
+		"name": "PFE",
+		"id": "7bb48f16-b615-479d-9b51-513ac00c86a3",
+		"activeDiagram": "9336379a-b39b-435a-acd9-402ca54fe616",
+		"desc": "",
+		"path": "",
+		"type": "MONGODB",
+		"version": 1,
+		"parentTableInFkCols": true,
+		"caseConvention": "under",
+		"replaceSpace": "_",
+		"color": "transparent",
+		"sideSelections": true,
+		"isDirty": false,
+		"storedin": {
+			"major": 4,
+			"minor": 5,
+			"extra": 0
+		},
+		"embeddedInParentsIsDisplayed": true,
+		"schemaContainerIsDisplayed": false,
+		"cardinalityIsDisplayed": false,
+		"estimatedSizeIsDisplayed": false,
+		"stickyParentIsDisplayed": false,
+		"def_coltopk": true,
+		"def_validationLevel": "na",
+		"def_validationAction": "na",
+		"def_collation": "",
+		"def_others": "",
+		"lastSaved": "Mon Mar 21 2022 15:12:01 GMT+0100 (GMT+01:00)"
+	},
+	"otherObjects": {},
+	"diagrams": {
+		"9336379a-b39b-435a-acd9-402ca54fe616": {
+			"name": "Main Diagram",
+			"description": "",
+			"id": "9336379a-b39b-435a-acd9-402ca54fe616",
+			"keysgraphics": true,
+			"linegraphics": "detailed",
+			"zoom": 1,
+			"background": "transparent",
+			"lineColor": "transparent",
+			"isOpen": true,
+			"main": true,
+			"diagramItems": {
+				"70822e71-48bc-455b-bedb-87e2d0eda03c": {
+					"referencedItemId": "70822e71-48bc-455b-bedb-87e2d0eda03c",
+					"x": 157,
+					"y": 445,
+					"gHeight": 187,
+					"gWidth": 229,
+					"color": "#ffffff",
+					"background": "#03a9f4",
+					"resized": false,
+					"autoExpand": true
+				},
+				"1c1c6831-371b-4a60-b4b2-159d23386fe2": {
+					"referencedItemId": "1c1c6831-371b-4a60-b4b2-159d23386fe2",
+					"x": 525,
+					"y": 709,
+					"gHeight": 62,
+					"gWidth": 207,
+					"color": "#ffffff",
+					"background": "#8bc34a",
+					"resized": false,
+					"autoExpand": true
+				},
+				"52b9183c-3813-4beb-8fce-4bb34e0c406e": {
+					"referencedItemId": "52b9183c-3813-4beb-8fce-4bb34e0c406e",
+					"x": 898,
+					"y": 648,
+					"gHeight": 62,
+					"gWidth": 192,
+					"color": "#ffffff",
+					"background": "#8bc34a",
+					"resized": false,
+					"autoExpand": true
+				},
+				"f8db035c-f796-42c8-a293-010d3abb064d": {
+					"referencedItemId": "f8db035c-f796-42c8-a293-010d3abb064d",
+					"x": 870,
+					"y": 328,
+					"gHeight": 313,
+					"gWidth": 250,
+					"color": "#ffffff",
+					"background": "#03a9f4",
+					"resized": false,
+					"autoExpand": true
+				},
+				"3b78d2c0-657e-4fb0-b85a-636d7fe807dd": {
+					"referencedItemId": "3b78d2c0-657e-4fb0-b85a-636d7fe807dd",
+					"x": 150,
+					"y": 132,
+					"gHeight": 151,
+					"gWidth": 191,
+					"color": "#ffffff",
+					"background": "#8bc34a",
+					"resized": false,
+					"autoExpand": true
+				},
+				"112f7d4d-edd1-4523-a189-29e7bea67a5f": {
+					"referencedItemId": "112f7d4d-edd1-4523-a189-29e7bea67a5f",
+					"x": 505,
+					"y": 191,
+					"gHeight": 294,
+					"gWidth": 251,
+					"color": "#ffffff",
+					"background": "#03a9f4",
+					"resized": false,
+					"autoExpand": true
+				}
+			},
+			"scroll": {
+				"x": 0,
+				"y": 0
+			},
+			"type": "erd"
+		}
+	},
+	"order": []
+}
