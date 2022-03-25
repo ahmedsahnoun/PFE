@@ -105,7 +105,7 @@ export default function JobForm({ templates, onSubmit }) {
                             variant="outlined"
                             value={about}
                             onChange={(event) =>
-                              handleChangeskill(index, event)
+                              handleChangeInput(index, event)
                             }
                           />
                         </Grid>
