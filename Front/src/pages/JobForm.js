@@ -10,8 +10,6 @@ import {
 import CreatableSelect from "react-select/creatable";
 import { Icon } from "@iconify/react";
 import { useState } from "react";
-import Autocomplete from "@mui/material/Autocomplete";
-import Chip from "@mui/material/Chip";
 // components
 // ----------------------------------------------------------------------
 
@@ -24,10 +22,16 @@ export default function JobForm({ templates, onSubmit }) {
     console.log(values);
     setTemplate(values);
   };
+  const handleChangeskill = (index, event) => {
+    const values = [...template];
+    values[index].skills = event.map(a => a.value);
+    setTemplate(values);
+    console.log(template);
+  };
 
   const renderer = ({ template }) => {
     return template.map((temp, index) => {
-      let { position, skills } = temp;
+      let { position, skills, about, location } = temp;
       return (
         <Container maxWidth="xl" key={index}>
           <Box sx={{ p: 3, pt: 0 }}>
@@ -60,9 +64,14 @@ export default function JobForm({ templates, onSubmit }) {
                             </Typography>
                           </Box>
                           <TextField
+                            name="location"
                             label="Location"
                             fullWidth
                             variant="outlined"
+                            value={location}
+                            onChange={(event) =>
+                              handleChangeInput(index, event)
+                            }
                           />
                         </Grid>
                         <Grid item xs={4}>
@@ -71,41 +80,14 @@ export default function JobForm({ templates, onSubmit }) {
                               <Icon icon="bi:ui-checks-grid" /> Skills:
                             </Typography>
                           </Box>
-                          <Autocomplete
-                            name="skills"
-                            multiple
-                            options={skills}
-                            freeSolo
-                            renderTags={(value, getTagProps) =>
-                              value.map((option, index) => (
-                                <Chip
-                                  variant="outlined"
-                                  label={option}
-                                  {...getTagProps({ index })}
-                                  onChange={(event) =>
-                                    handleChangeInput(index, event)
-                                  }
-                                />
-                              ))
-                            }
-                            renderInput={(skills) => (
-                              <TextField
-                                {...skills}
-                                label="Skills"
-                                placeholder="Skills"
-                              />
-                            )}
-                            onChange={(event) =>
-                              handleChangeInput(index, event)
-                            }
-                          />
                           <CreatableSelect
                             name="skills"
                             placeholder="Skills"
                             isMulti
-                            value={skills}
+                            value={skills.map((s) => ({ value: s, label: s }))}
+                            setValue
                             onChange={(event) =>
-                              handleChangeInput(index, event)
+                              handleChangeskill(index, event)
                             }
                           />
                         </Grid>
@@ -116,10 +98,15 @@ export default function JobForm({ templates, onSubmit }) {
                             </Typography>
                           </Box>
                           <TextField
+                            name="about"
                             fullWidth
                             multiline
                             rows={6}
                             variant="outlined"
+                            value={about}
+                            onChange={(event) =>
+                              handleChangeskill(index, event)
+                            }
                           />
                         </Grid>
                       </Grid>

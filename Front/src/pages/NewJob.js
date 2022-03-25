@@ -9,8 +9,8 @@ export default function NewJob() {
   //   { value: "vanilla", label: "Vanilla" },
   // ];
 	const template = [
-		{ id: 1 , position: ':D', skills:[':o'] },
-		{ id: 2 , position: '>:('}
+		{ id: 1 , position: ':D', skills:[':o',':D',':('], location:":) location", about:":)"},
+		{ id: 2 , position: '>:(', skills:['>:o'], location:":( location", about:":("}
 	]
   function onSubmit() {
     alert(JSON.stringify(template, null, 2));
