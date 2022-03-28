@@ -9,9 +9,9 @@ import {
 } from "@mui/material";
 import { Icon } from "@iconify/react";
 import IconButton from "@mui/material/IconButton";
-import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
 // components
 import Page from "../components/Page";
 import { useState } from "react";
@@ -19,14 +19,26 @@ import { useState } from "react";
 
 export default function Newproject({ Title }) {
   const [inputFields, setInputFields] = useState([{ position: "", number: 1 }]);
-  const [title, setTitle] = useState();
-  const [client, setClient] = useState();
+  const [title, setTitle] = useState("");
+  const [manager, setManager] = useState("");
+  const [client, setClient] = useState("");
+  const [about, setAbout] = useState("");
   const [dateD, setDateD] = useState(new Date());
   const [dateF, setDateF] = useState(new Date());
 
+  let project = {
+    title: title,
+    client: client,
+    manager: manager,
+    dateD: dateD,
+    DateF: dateF,
+    about: about,
+    inputFields: inputFields,
+  };
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    alert(JSON.stringify(dateD, null, 2));
+    alert(JSON.stringify(project, null, 2));
   };
 
   const handleChangeInput = (index, event) => {
@@ -43,7 +55,6 @@ export default function Newproject({ Title }) {
     const values = [...inputFields];
     if (values.length > 1) {
       values.splice(index, 1);
-      console.log(values);
       setInputFields(values);
     }
   };
@@ -97,22 +108,27 @@ export default function Newproject({ Title }) {
                           <TextField
                             sx={{ pb: 4, pt: 1 }}
                             fullWidth
-                            name="manager"
                             variant="outlined"
+                            name="manager"
+                            value={manager}
+                            onChange={(e) => setManager(e.target.value)}
                           />
                           <Box sx={{ pb: 1 }}>
                             <Typography variant="h5">
-                              <Icon icon="foundation:torso-business" /> Starting date:
+                              <Icon icon="foundation:torso-business" /> Starting
+                              date:
                             </Typography>
                           </Box>
                           <LocalizationProvider dateAdapter={AdapterDateFns}>
-                          <DesktopDatePicker
-                            inputFormat="dd/MM/yyyy"
-                            value={dateD}
-                            onChange={(e) => setDateD(e)}
-                            renderInput={(params) => <TextField {...params} />}
-                          />
-                          </LocalizationProvider> 
+                            <DesktopDatePicker
+                              inputFormat="dd/MM/yyyy"
+                              value={dateD}
+                              onChange={(e) => setDateD(e)}
+                              renderInput={(params) => (
+                                <TextField {...params} />
+                              )}
+                            />
+                          </LocalizationProvider>
                         </Grid>
                         <Grid item xs={6}>
                           <Box sx={{ pb: 1 }}>
@@ -125,19 +141,25 @@ export default function Newproject({ Title }) {
                             multiline
                             rows={12}
                             variant="outlined"
+                            name="about"
+                            value={about}
+                            onChange={(e) => setAbout(e.target.value)}
                           />
                           <Box sx={{ pb: 1, pt: 4 }}>
                             <Typography variant="h5">
-                              <Icon icon="foundation:torso-business" /> Finishing date:
+                              <Icon icon="foundation:torso-business" />{" "}
+                              Finishing date:
                             </Typography>
                           </Box>
                           <LocalizationProvider dateAdapter={AdapterDateFns}>
-                          <DesktopDatePicker
-                            inputFormat="dd/MM/yyyy"
-                            value={dateF} 
-                            onChange={(e) => setDateF(e)}
-                            renderInput={(params) => <TextField {...params} />}
-                          />
+                            <DesktopDatePicker
+                              inputFormat="dd/MM/yyyy"
+                              value={dateF}
+                              onChange={(e) => setDateF(e)}
+                              renderInput={(params) => (
+                                <TextField {...params} />
+                              )}
+                            />
                           </LocalizationProvider>
                         </Grid>
                       </Grid>
@@ -162,7 +184,6 @@ export default function Newproject({ Title }) {
                               <Grid item xs={2}>
                                 <Button
                                   variant="contained"
-                                  aria-label="delete"
                                   onClick={handleAddFields}
                                 >
                                   ADD +

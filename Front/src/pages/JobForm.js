@@ -7,24 +7,40 @@ import {
   Button,
   Card,
 } from "@mui/material";
-import CreatableSelect from "react-select/creatable";
 import { Icon } from "@iconify/react";
-import { useState } from "react";
+import Chip from "@mui/material/Chip";
+import Autocomplete from "@mui/material/Autocomplete";
 // components
 // ----------------------------------------------------------------------
 
-export default function JobForm({ templates, onSubmit }) {
-  const [template, setTemplate] = useState(templates);
-
+export default function JobForm({ template, setTemplate, onSubmit }) {
   const handleChangeInput = (index, event) => {
     const values = [...template];
     values[index][event.target.name] = event.target.value;
-    console.log(values);
     setTemplate(values);
+    console.log(template);
   };
-  const handleChangeskill = (index, event) => {
+
+  const handleAdd = () => {
+    const values = [
+      ...template,
+      { position: "", skills: [], about: "", location: "" },
+    ];
+    setTemplate(values);
+    console.log(template);
+  };
+
+  const handleDelete = (index, event) => {
     const values = [...template];
-    values[index].skills = event.map(a => a.value);
+    if (values.length > 1) {
+      values.splice(index, 1);
+      setTemplate(values);
+    }
+  };
+
+  const handleChangeSkills = (index, value) => {
+    const values = [...template];
+    values[index].skills = value;
     setTemplate(values);
     console.log(template);
   };
@@ -40,6 +56,16 @@ export default function JobForm({ templates, onSubmit }) {
                 <Grid item xs={12}>
                   <Card>
                     <Box sx={{ p: 3 }}>
+                      <Grid style={{ textAlign: "right" }}>
+                        <Button
+                          size="small"
+                          variant="contained"
+                          color="error"
+                          onClick={(event) => handleDelete(index, event)}
+                        >
+                          delete
+                        </Button>
+                      </Grid>
                       <Grid container spacing={3}>
                         <Grid item xs={4}>
                           <Box sx={{ pb: 2 }}>
@@ -80,15 +106,27 @@ export default function JobForm({ templates, onSubmit }) {
                               <Icon icon="bi:ui-checks-grid" /> Skills:
                             </Typography>
                           </Box>
-                          <CreatableSelect
-                            name="skills"
-                            placeholder="Skills"
-                            isMulti
-                            value={skills.map((s) => ({ value: s, label: s }))}
-                            setValue
-                            onChange={(event) =>
-                              handleChangeskill(index, event)
+                          <Autocomplete
+                            multiple
+                            id="tags-filled"
+                            options={skills.map((option) => option)}
+                            value={skills}
+                            freeSolo
+                            onChange={(event, value) =>
+                              handleChangeSkills(index, value)
                             }
+                            renderTags={(value, getTagProps) =>
+                              value.map((option, index) => (
+                                <Chip
+                                  variant="outlined"
+                                  label={option}
+                                  {...getTagProps({ index })}
+                                />
+                              ))
+                            }
+                            renderInput={(params) => (
+                              <TextField {...params} label="Skills" />
+                            )}
                           />
                         </Grid>
                         <Grid item xs={4}>
@@ -123,6 +161,15 @@ export default function JobForm({ templates, onSubmit }) {
 
   return (
     <form onSubmit={onSubmit}>
+      {
+        <Grid container spacing={1} padding={3}>
+          <Grid item xs={1}>
+            <Button variant="contained" aria-label="delete" onClick={handleAdd}>
+              ADD +
+            </Button>
+          </Grid>
+        </Grid>
+      }
       {renderer({ template })}
       <Container>
         <Grid margin={6} style={{ textAlign: "center" }}>
