@@ -1,5 +1,6 @@
 import os
 import io
+import re
 import spacy
 import docx2txt
 import constants as cs
