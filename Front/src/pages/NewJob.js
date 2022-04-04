@@ -5,8 +5,9 @@ import { useState } from "react";
 
 export default function NewJob() {
   const templates = [
-    { position: ':D', skills:[':o',':D',':('], location:":) location", about:":)"},
-    { position: '>:(', skills:['>:o'], location:":( location", about:":("}
+    { position: 'data scientist', skills:['machine learning','python'], location:"location 1", about:""},
+    { position: 'manager', skills:[], location:'', about:''},
+    { position: '', skills:[], location:"location 2", about:""},
   ]
   
   const [template, setTemplate] = useState(templates);

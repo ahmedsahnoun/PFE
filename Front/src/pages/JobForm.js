@@ -54,8 +54,8 @@ export default function JobForm({ template, setTemplate, onSubmit }) {
             <Grid container spacing={3}>
               <Grid container spacing={3} item xs={12}>
                 <Grid item xs={12}>
-                  <Card>
-                    <Box sx={{ p: 3 }}>
+                  <Card sx={{ p: 3, boxShadow: 8}}>
+                    <Box>
                       <Grid style={{ textAlign: "right" }}>
                         <Button
                           size="small"

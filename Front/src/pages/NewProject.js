@@ -65,12 +65,12 @@ export default function Newproject({ Title }) {
           <Box sx={{ pb: 5 }}>
             <Typography variant="h4">Hi, Welcome back</Typography>
           </Box>
-          <Box sx={{ p: 3 }}>
+          <Box sx={{ p: 3  }}>
             <Grid container spacing={3}>
               <Grid container spacing={3} item xs={6}>
                 <Grid item xs={12}>
-                  <Card>
-                    <Box sx={{ p: 3 }}>
+                  <Card sx={{ p: 3, boxShadow: 8}}>
+                    <Box>
                       <Grid container spacing={3}>
                         <Grid item xs={6}>
                           <Box>
@@ -169,8 +169,8 @@ export default function Newproject({ Title }) {
               </Grid>
               <Grid container spacing={3} item xs={6}>
                 <Grid item xs={12}>
-                  <Card>
-                    <Box sx={{ p: 3 }}>
+                  <Card sx={{ p: 3, boxShadow: 8}}>
+                    <Box>
                       <Grid container spacing={3}>
                         <Grid item xs={12}>
                           <Box sx={{ pb: 2, pt: 2 }}>
