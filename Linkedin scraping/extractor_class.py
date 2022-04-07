@@ -4,6 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 from os.path import exists
 import time
 import csv
@@ -19,7 +20,7 @@ class extractor:
 		options.add_argument('--ignore-ssl-errors')
 		options.add_argument('log-level=3')
 		options.add_argument('user-data-dir=/tmp/tarun')
-		self.driver = webdriver.Chrome(options=options)
+		self.driver = webdriver.Chrome(ChromeDriverManager().install(),options=options)
 
 	def __del__(self):
 		try:

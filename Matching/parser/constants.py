@@ -26,6 +26,7 @@ STOPWORDS = set(stopwords.words('english'))
 RESUME_SECTIONS_GRAD = [
                     'accomplishments',
                     'experience',
+                    'expérience',
                     'education',
                     'interests',
                     'projects',
@@ -36,6 +37,6 @@ RESUME_SECTIONS_GRAD = [
                     'objective',
                     'career objective',
                     'summary',
-						  'work',
-                    'leadership'
                 ]
+
+EXP = ['experience','expérience','experiences','expériences']
