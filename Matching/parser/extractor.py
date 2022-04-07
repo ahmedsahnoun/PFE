@@ -194,16 +194,10 @@ def extract_name(nlp_text, matcher):
 			return span.text
 
 
-def extract_mobile_number(text, custom_regex=None):
-	if not custom_regex:
-		mob_num_regex = r'''(\d{3}[-\.\s]??\d{3}[-\.\s]??\d{4}|\(\d{3}\)
-						[-\.\s]*\d{3}[-\.\s]??\d{4}|\d{3}[-\.\s]??\d{4})'''
-		phone = re.findall(re.compile(mob_num_regex), text)
-	else:
-		phone = re.findall(re.compile(custom_regex), text)
-	if phone:
-		number = ''.join(phone[0])
-		return number
+def extract_mobile_number(text):
+	numbers = re.findall(r"((?:(?:\+|00)216\s?)?(?:(?:[0-9]{2}\s?[0-9]{3}\s?[0-9]{3})|(?:[0-9]{2}\s?[0-9]{2}\s?[0-9]{2}\s?[0-9]{2}\s?)))", text)
+	print(numbers)
+	return numbers[0]
 
 
 def extract_skills(nlp_text, noun_chunks, skills_file=None):

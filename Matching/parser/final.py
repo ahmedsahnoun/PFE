@@ -61,24 +61,6 @@ class ResumeParser(object):
 			url = extract_url(self.text)
 		except:
 			pass
-		try:
-			education = entities['College Name']
-		except:
-			pass
-		# print('name: ',name)
-		# print('------------------------------')
-		# print('email: ',email)
-		# print('------------------------------')
-		# print('mobile: ',mobile)
-		# print('------------------------------')
-		# print('skills: ',skills)
-		# print('------------------------------')
-		# print('exp: ',exp)
-		# print('------------------------------')
-		# print('entities: ',entities)
-		# print('------------------------------')
-		# print('cust_ent: ',cust_ent)
-		# print('------------------------------')
 		return({
 					'name':name,
 					'email':email,
@@ -86,7 +68,6 @@ class ResumeParser(object):
 					'url':url,
 					'skills':skills,
 					'experience':experience,
-					'education':education
 					})
 
 	def details(self):
