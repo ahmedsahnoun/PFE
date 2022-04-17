@@ -1,2 +1,5 @@
 /Other
 /DB
+/Back/venv
+*.pyc
+*.pyo
