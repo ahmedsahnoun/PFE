@@ -52,43 +52,28 @@ def extract_text(file_path):
 
 def extract_entity_sections_grad(text):
 	text_split = [i.strip() for i in text.split('\n')]
-	# sections_in_resume = [i for i in text_split if i.lower() in sections]
-	entities = {}
+	entities ={}
 	key = False
 	for phrase in text_split:
 		if len(phrase) == 1:
-			p_key = phrase
+			p_key = phrase.lower()
 		else:
-			p_key = set(phrase.lower().split()) & set(cs.RESUME_SECTIONS_GRAD)
+			p_key = set(phrase.lower().split()) & set(cs.SECTIONS)
 		try:
 			p_key = list(p_key)[0]
 		except IndexError:
 			pass
-		if p_key in cs.RESUME_SECTIONS_GRAD:
-			entities[p_key] = []
-			key = p_key
+		if p_key in cs.SECTIONS:
+			if p_key in cs.ED:
+				key = 'education'
+			elif p_key in cs.EXP:
+				key = 'experience'
+			else:
+				key = p_key
+			entities[key] = []
 		elif key and phrase.strip():
 			entities[key].append(phrase)
 	return entities
-
-def extract_experience(text):
-	text_split = [i.strip() for i in text.split('\n')]
-	experience =''
-	key = False
-	for phrase in text_split:
-		if len(phrase) == 1:
-			p_key = phrase
-		else:
-			p_key = set(phrase.lower().split()) & set(cs.EXP)
-		try:
-			p_key = list(p_key)[0]
-		except IndexError:
-			pass
-		if p_key in cs.EXP:
-			key = p_key
-		elif key and phrase.strip():
-			experience = experience+' '+phrase
-	return experience.strip()
 
 def extract_entities_wih_custom_model(custom_nlp_text):
 	entities = {}
@@ -195,9 +180,8 @@ def extract_name(nlp_text, matcher):
 
 
 def extract_mobile_number(text):
-	numbers = re.findall(r"((?:(?:\+|00)216\s?)?(?:(?:[0-9]{2}\s?[0-9]{3}\s?[0-9]{3})|(?:[0-9]{2}\s?[0-9]{2}\s?[0-9]{2}\s?[0-9]{2}\s?)))", text)
-	print(numbers)
-	return numbers[0]
+	numbers = re.findall(r"(?:[0-9]\s?){8}(?:[0-9]\s?)*", text)
+	return numbers[0].strip()
 
 
 def extract_skills(nlp_text, noun_chunks, skills_file=None):

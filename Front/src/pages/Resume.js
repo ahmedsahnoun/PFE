@@ -22,7 +22,7 @@ export default function Resume() {
                <Grid container spacing={3}>
                   <Grid container spacing={3} item xs={6}>
                      <Grid item xs={12}>
-                        <Card sx={{height:1}}>
+                        <Card sx={{ boxShadow: 8}}>
                            <Box sx={{ p: 3 }}>
                               <Grid container spacing={3}>
                                  <Grid item xs={6}>
@@ -117,7 +117,7 @@ export default function Resume() {
                   </Grid>
                   <Grid container spacing={3} item xs={6}>
                      <Grid item xs={12}>
-                        <Card>
+                        <Card sx={{ boxShadow: 8}}>
                            <Box sx={{ p: 3 }}>
                               <Grid container spacing={3}>
                                  <Grid item xs={6}>
@@ -144,7 +144,7 @@ export default function Resume() {
                   </Grid>
                   <Grid container spacing={3} item xs={6}>
                      <Grid item xs={12}>
-                        <Card>
+                        <Card sx={{ boxShadow: 8}}>
                            <Box sx={{ p: 3 }}>
                               <Grid container spacing={3}>
                                  <Grid item xs={12}>

@@ -36,10 +36,54 @@ export default function Newproject({ Title }) {
     inputFields: inputFields,
   };
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    alert(JSON.stringify(project, null, 2));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let id = "62599b8a19f9482d5dc1fdf7";
+    fetch("http://localhost:5000/Project/" + id, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(project),
+    })
+      .then((res) => {
+        if (res.ok) {
+          console.log("sent");
+
+          let response = res.text();
+          console.log(response);
+
+          response.then((res) => {
+            console.log(res);
+          });
+        }
+      })
+      .catch((_) => console.log("not sent"));
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   fetch("http://localhost:5000/NewProject", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-type": "application/json",
+  //     },
+  //     body: JSON.stringify(project),
+  //   })
+  //     .then((res) => {
+  //       if (res.ok) {
+  //         console.log("sent");
+
+  //         let response = res.json();
+  //         console.log(response);
+  
+  //         response.then((res) => {
+  //           console.log(res);
+  //         });
+  //       }
+  //     })
+  //     .catch((_) => console.log("not sent"));
+  // };
 
   const handleChangeInput = (index, event) => {
     const values = [...inputFields];
@@ -65,11 +109,11 @@ export default function Newproject({ Title }) {
           <Box sx={{ pb: 5 }}>
             <Typography variant="h4">Hi, Welcome back</Typography>
           </Box>
-          <Box sx={{ p: 3  }}>
+          <Box sx={{ p: 3 }}>
             <Grid container spacing={3}>
               <Grid container spacing={3} item xs={6}>
                 <Grid item xs={12}>
-                  <Card sx={{ p: 3, boxShadow: 8}}>
+                  <Card sx={{ p: 3, boxShadow: 8 }}>
                     <Box>
                       <Grid container spacing={3}>
                         <Grid item xs={6}>
@@ -169,7 +213,7 @@ export default function Newproject({ Title }) {
               </Grid>
               <Grid container spacing={3} item xs={6}>
                 <Grid item xs={12}>
-                  <Card sx={{ p: 3, boxShadow: 8}}>
+                  <Card sx={{ p: 3, boxShadow: 8 }}>
                     <Box>
                       <Grid container spacing={3}>
                         <Grid item xs={12}>

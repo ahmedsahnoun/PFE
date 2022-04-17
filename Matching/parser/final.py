@@ -32,7 +32,10 @@ class ResumeParser(object):
 		self.noun_chunks = list(self.nlp.noun_chunks)
 
 	def get_details(self):
-		name,email,mobile,skills,cust_ent,experience,education,url = None,None,None,None,None,None,None,None
+		name,email,mobile,skills,experience,education,url = None,None,None,None,None,None,None
+
+		entities = extract_entity_sections_grad(self.text_raw)
+
 		try:
 			name = extract_name(self.nlp, matcher=self.matcher)
 		except:
@@ -50,15 +53,15 @@ class ResumeParser(object):
 		except:
 			pass
 		try:
-			entities = extract_entity_sections_grad(self.text_raw)
-		except:
-			pass
-		try:
-			experience = extract_experience(self.text_raw)
+			experience = entities['experience']
 		except:
 			pass
 		try:
 			url = extract_url(self.text)
+		except:
+			pass
+		try:
+			education = entities['education']
 		except:
 			pass
 		return({
@@ -68,10 +71,8 @@ class ResumeParser(object):
 					'url':url,
 					'skills':skills,
 					'experience':experience,
+					'education':education,
 					})
 
 	def details(self):
 		print(self.get_details())
-
-	def leng(self):
-		print(detect(self.text))

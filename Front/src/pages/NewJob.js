@@ -16,10 +16,25 @@ export default function NewJob() {
   //   { value: "strawberry", label: "Strawberry" },
   //   { value: "vanilla", label: "Vanilla" },
   // ];
-  function onSubmit() {
-    console.log(template)
-    alert(JSON.stringify(template, null, 2));
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    fetch("http://localhost:5000/NewJob", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(template),
+    })
+      .then((res) => {
+        if (res.ok) {
+          console.log("sent")
+          console.log(res)
+        }
+      })
+      .catch((_) => console.log("not sent"))
   }
+
   return (
     <Page title="New job">
 			<JobForm template={template} setTemplate={setTemplate} onSubmit={onSubmit}/>
