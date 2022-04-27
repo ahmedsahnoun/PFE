@@ -4,21 +4,27 @@ import {
   Container,
   Typography,
   TextField,
-  Button,
   Card,
 } from "@mui/material";
 import { Icon } from "@iconify/react";
-import IconButton from "@mui/material/IconButton";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 // components
 import Page from "../components/Page";
 import { useState } from "react";
+import JobForm from "./JobForm";
 // ----------------------------------------------------------------------
 
 export default function Newproject({ Title }) {
-  const [inputFields, setInputFields] = useState([{ position: "", number: 1 }]);
+  const job = [{ position: "", skills: [], location: "", about: "" }];
+
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const [jobs, setJobs] = useState(job);
   const [title, setTitle] = useState("");
   const [manager, setManager] = useState("");
   const [client, setClient] = useState("");
@@ -31,15 +37,15 @@ export default function Newproject({ Title }) {
     client: client,
     manager: manager,
     dateD: dateD,
-    DateF: dateF,
+    dateF: dateF,
     about: about,
-    inputFields: inputFields,
+    jobs: jobs,
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let id = "62599b8a19f9482d5dc1fdf7";
-    fetch("http://localhost:5000/Project/" + id, {
+  const access = (id) => {
+    // window.location.href = "/NewJob";
+    // let id = "62599b8a19f9482d5dc1fdf7";
+    fetch("/Project/" + id, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -51,67 +57,72 @@ export default function Newproject({ Title }) {
           console.log("sent");
 
           let response = res.text();
-          console.log(response);
 
           response.then((res) => {
-            console.log(res);
+            let result = JSON.parse(res)["result"];
+            console.log(result);
           });
         }
       })
       .catch((_) => console.log("not sent"));
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   fetch("http://localhost:5000/NewProject", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-type": "application/json",
-  //     },
-  //     body: JSON.stringify(project),
-  //   })
-  //     .then((res) => {
-  //       if (res.ok) {
-  //         console.log("sent");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch("/NewProject", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(project),
+    })
+      .then((res) => {
+        if (res.ok) {
+          setSuccess(true);
 
-  //         let response = res.json();
-  //         console.log(response);
-  
-  //         response.then((res) => {
-  //           console.log(res);
-  //         });
-  //       }
-  //     })
-  //     .catch((_) => console.log("not sent"));
-  // };
+          let response = res.text();
+          console.log(response);
 
-  const handleChangeInput = (index, event) => {
-    const values = [...inputFields];
-    values[index][event.target.name] = event.target.value;
-    setInputFields(values);
+          response.then((res) => {
+            let result = JSON.parse(res)["result"];
+            console.log(result);
+            access(result);
+          });
+        } else {
+          setError(true);
+        }
+      })
+      .catch((_) => console.log("not sent"));
   };
 
-  const handleAddFields = () => {
-    setInputFields([...inputFields, { position: "", number: 1 }]);
-  };
-
-  const handleRemoveFields = (index) => {
-    const values = [...inputFields];
-    if (values.length > 1) {
-      values.splice(index, 1);
-      setInputFields(values);
-    }
-  };
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
       <Page title={Title}>
+        <Box sx={{ p: 5 }}>
+          <Typography variant="h4">Details:</Typography>
+        </Box>
         <Container maxWidth="xl">
-          <Box sx={{ pb: 5 }}>
-            <Typography variant="h4">Hi, Welcome back</Typography>
-          </Box>
+          <Snackbar
+            open={success}
+            autoHideDuration={3000}
+            onClose={() => setSuccess(false)}
+          >
+            <MuiAlert severity="success" sx={{ width: "100%" }}>
+              Success
+            </MuiAlert>
+          </Snackbar>
+          <Snackbar
+            open={error}
+            autoHideDuration={3000}
+            onClose={() => setError(false)}
+          >
+            <MuiAlert severity="error" sx={{ width: "100%" }}>
+              Error. Please retry
+            </MuiAlert>
+          </Snackbar>
           <Box sx={{ p: 3 }}>
             <Grid container spacing={3}>
-              <Grid container spacing={3} item xs={6}>
+              <Grid container spacing={3} item xs={12}>
                 <Grid item xs={12}>
                   <Card sx={{ p: 3, boxShadow: 8 }}>
                     <Box>
@@ -211,96 +222,18 @@ export default function Newproject({ Title }) {
                   </Card>
                 </Grid>
               </Grid>
-              <Grid container spacing={3} item xs={6}>
-                <Grid item xs={12}>
-                  <Card sx={{ p: 3, boxShadow: 8 }}>
-                    <Box>
-                      <Grid container spacing={3}>
-                        <Grid item xs={12}>
-                          <Box sx={{ pb: 2, pt: 2 }}>
-                            <Grid container>
-                              <Grid item xs={10}>
-                                <Typography variant="h5">
-                                  <Icon icon="fluent:people-team-toolbox-20-filled" />{" "}
-                                  Staffing:
-                                </Typography>
-                              </Grid>
-                              <Grid item xs={2}>
-                                <Button
-                                  variant="contained"
-                                  onClick={handleAddFields}
-                                >
-                                  ADD +
-                                </Button>
-                              </Grid>
-                            </Grid>
-                          </Box>
-                          {inputFields.map((inputField, index) => (
-                            <Grid
-                              container
-                              spacing={3}
-                              sx={{ pb: 2.5 }}
-                              key={index}
-                            >
-                              <Grid item xs={7}>
-                                <TextField
-                                  fullWidth
-                                  name="position"
-                                  label="position"
-                                  variant="outlined"
-                                  value={inputField.position}
-                                  onChange={(event) =>
-                                    handleChangeInput(index, event)
-                                  }
-                                />
-                              </Grid>
-                              <Grid item xs={3}>
-                                <TextField
-                                  fullWidth
-                                  name="number"
-                                  label="number"
-                                  variant="outlined"
-                                  inputProps={{ type: "number", min: 1 }}
-                                  value={inputField.number}
-                                  onChange={(event) =>
-                                    handleChangeInput(index, event)
-                                  }
-                                />
-                              </Grid>
-                              <Grid item xs={2}>
-                                <IconButton
-                                  aria-label="delete"
-                                  size="large"
-                                  value={index}
-                                  onClick={() => handleRemoveFields(index)}
-                                >
-                                  x
-                                </IconButton>
-                              </Grid>
-                            </Grid>
-                          ))}
-                        </Grid>
-                      </Grid>
-                    </Box>
-                  </Card>
-                </Grid>
-              </Grid>
             </Grid>
           </Box>
         </Container>
-        <Container>
-          <Grid margin={6} style={{ textAlign: "center" }}>
-            <Button
-              type="submit"
-              size="large"
-              variant="contained"
-              color="primary"
-            >
-              CONFIRM
-            </Button>
-          </Grid>
-        </Container>
+        <Box sx={{ p: 5 }}>
+          <Typography variant="h4">Staffing:</Typography>
+        </Box>
+        <JobForm
+          template={jobs}
+          setTemplate={setJobs}
+          onSubmit={handleSubmit}
+        />
       </Page>
-    </form>
+    </div>
   );
 }

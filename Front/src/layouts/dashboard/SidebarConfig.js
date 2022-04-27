@@ -30,6 +30,11 @@ const sidebarConfig = [
     title: 'Resume',
     path: '/Resume',
     icon: getIcon('eva:file-text-fill')
+  },
+  {
+    title: 'Projects',
+    path: '/Projects',
+    icon: getIcon('eva:file-text-fill')
   }
 ];
 

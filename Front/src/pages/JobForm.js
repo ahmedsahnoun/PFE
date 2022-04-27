@@ -8,17 +8,17 @@ import {
   Card,
 } from "@mui/material";
 import { Icon } from "@iconify/react";
+import Iconify from '../components/Iconify';
 import Chip from "@mui/material/Chip";
 import Autocomplete from "@mui/material/Autocomplete";
 // components
 // ----------------------------------------------------------------------
 
-export default function JobForm({ template, setTemplate, onSubmit }) {
+export default function JobForm({ template, setTemplate, onSubmit, hasAdd=true, hasConfirm=true }) {
   const handleChangeInput = (index, event) => {
     const values = [...template];
     values[index][event.target.name] = event.target.value;
     setTemplate(values);
-    console.log(template);
   };
 
   const handleAdd = () => {
@@ -27,7 +27,6 @@ export default function JobForm({ template, setTemplate, onSubmit }) {
       { position: "", skills: [], about: "", location: "" },
     ];
     setTemplate(values);
-    console.log(template);
   };
 
   const handleDelete = (index, event) => {
@@ -42,7 +41,36 @@ export default function JobForm({ template, setTemplate, onSubmit }) {
     const values = [...template];
     values[index].skills = value;
     setTemplate(values);
-    console.log(template);
+  };
+
+  const confirm = () => {
+    return (
+      <Container>
+        <Grid margin={6} style={{ textAlign: "center" }}>
+          <Button
+            type="submit"
+            size="large"
+            variant="contained"
+            color="primary"
+          >
+            CONFIRM
+          </Button>
+        </Grid>
+      </Container>
+    );
+  };
+  
+  const add = () => {
+    return (
+      <Grid container spacing={1} padding={3}>
+        <Grid item xs={1}>
+          <Button variant="contained" aria-label="delete" onClick={handleAdd} 
+            startIcon={<Iconify icon="eva:plus-fill" />}>
+            ADD
+          </Button>
+        </Grid>
+      </Grid>
+    );
   };
 
   const renderer = ({ template }) => {
@@ -54,7 +82,7 @@ export default function JobForm({ template, setTemplate, onSubmit }) {
             <Grid container spacing={3}>
               <Grid container spacing={3} item xs={12}>
                 <Grid item xs={12}>
-                  <Card sx={{ p: 3, boxShadow: 8}}>
+                  <Card sx={{ p: 3, boxShadow: 8 }}>
                     <Box>
                       <Grid style={{ textAlign: "right" }}>
                         <Button
@@ -161,28 +189,9 @@ export default function JobForm({ template, setTemplate, onSubmit }) {
 
   return (
     <form onSubmit={onSubmit}>
-      {
-        <Grid container spacing={1} padding={3}>
-          <Grid item xs={1}>
-            <Button variant="contained" aria-label="delete" onClick={handleAdd}>
-              ADD +
-            </Button>
-          </Grid>
-        </Grid>
-      }
       {renderer({ template })}
-      <Container>
-        <Grid margin={6} style={{ textAlign: "center" }}>
-          <Button
-            type="submit"
-            size="large"
-            variant="contained"
-            color="primary"
-          >
-            CONFIRM
-          </Button>
-        </Grid>
-      </Container>
+      {hasAdd ? add() : <></>}
+      {hasConfirm ? confirm() : <></>}
     </form>
   );
 }
