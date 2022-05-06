@@ -4,135 +4,185 @@ import {
   Container,
   Typography,
   TextField,
-  Button,
   Card,
 } from "@mui/material";
 import { Icon } from "@iconify/react";
+import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
 // components
 import Page from "../components/Page";
+import Match from "../components/Match";
+// components
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import NotFound from "./Page404";
 // ----------------------------------------------------------------------
 
-export default function Project({ Title }) {
+function ProjectPage(props) {
+  let data = props.data;
+  // const [jobs, setJobs] = useState();
+  const [title, setTitle] = useState(data.title);
+  const [manager, setManager] = useState(data.manager);
+  const [client, setClient] = useState(data.client);
+  const [about, setAbout] = useState(data.about);
+  const [dateD, setDateD] = useState(data.dateD);
+  const [dateF, setDateF] = useState(data.dateF);
+
   return (
-    <Page title={Title}>
-      <Container maxWidth="xl">
-        <Box sx={{ pb: 5 }}>
-          <Typography variant="h4">Hi, Welcome back</Typography>
+    <div>
+      <Page title="Project">
+        <Typography variant="h3" align="right" sx={{ color: "white", pr: 8 }}>
+          Project
+        </Typography>
+        <Box sx={{ p: 5 }}>
+          <Typography variant="h4">Details:</Typography>
         </Box>
-        <Box sx={{ p: 3 }}>
-          <Grid container spacing={3}>
-            <Grid container spacing={3} item xs={6}>
-              <Grid item xs={12}>
-                <Card>
-                  <Box sx={{ p: 3 }}>
-                    <Grid container spacing={3}>
-                      <Grid item xs={6}>
-                        <Box>
-                          <Typography variant="h5">
-                            <Icon icon="system-uicons:document-words" /> Title:
-                          </Typography>
-                        </Box>
-                        <TextField
-                          disabled
-                          sx={{ pb: 4, pt: 1 }}
-                          fullWidth
-                          id="Name"
-                          variant="outlined"
-                        />
-                        <Box>
-                          <Typography variant="h5">
-                            <Icon icon="ic:outline-work-outline" /> Client:
-                          </Typography>
-                        </Box>
-                        <TextField
-                          disabled
-                          sx={{ pb: 4, pt: 1 }}
-                          fullWidth
-                          id="Location"
-                          variant="outlined"
-                        />
-                        <Box>
-                          <Typography variant="h5">
-                            <Icon icon="foundation:torso-business" /> Manager:
-                          </Typography>
-                        </Box>
-                        <TextField
-                          disabled
-                          sx={{ pb: 4, pt: 1 }}
-                          fullWidth
-                          id="Location"
-                          variant="outlined"
-                        />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <Box sx={{ pb: 1 }}>
-                          <Typography variant="h5">
-                            <Icon icon="akar-icons:info" /> About:
-                          </Typography>
-                        </Box>
-                        <TextField
-                          disabled
-                          fullWidth
-                          multiline
-                          rows={14}
-                          variant="outlined"
-                        />
-                      </Grid>
-                    </Grid>
-                  </Box>
-                </Card>
-              </Grid>
-            </Grid>
-            <Grid container spacing={3} item xs={6}>
-              <Grid item xs={12}>
-                <Card>
-                  <Box sx={{ p: 3 }}>
-                    <Grid container spacing={3}>
-                      <Grid item xs={12}>
-                        <Box sx={{ pb: 2, pt: 2 }}>
-                          <Grid container>
-                            <Grid item xs={10}>
-                              <Typography variant="h5">
-                                <Icon icon="fluent:people-team-toolbox-20-filled" />{" "}
-                                Staffing:
-                              </Typography>
-                            </Grid>
-                          </Grid>
-                        </Box>
-                        <Grid container spacing={3} sx={{ pb: 2.5 }}>
-                          <Grid item xs={6}>
-                            <TextField
-                              fullWidth
-                              name="position"
-                              label="position"
-                              variant="outlined"
+        <Container maxWidth="xl">
+          <Box sx={{ p: 3 }}>
+            <Grid container spacing={3}>
+              <Grid container spacing={3} item xs={12}>
+                <Grid item xs={12}>
+                  <Card sx={{ p: 3, boxShadow: 8 }}>
+                    <Box>
+                      <Grid container spacing={3}>
+                        <Grid item xs={6}>
+                          <Box>
+                            <Typography variant="h5">
+                              <Icon icon="system-uicons:document-words" />{" "}
+                              Title:
+                            </Typography>
+                          </Box>
+                          <TextField
+                            disabled
+                            sx={{ pb: 4, pt: 1 }}
+                            fullWidth
+                            variant="outlined"
+                            name="title"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                          />
+                          <Box>
+                            <Typography variant="h5">
+                              <Icon icon="ic:outline-work-outline" /> Client:
+                            </Typography>
+                          </Box>
+                          <TextField
+                            disabled
+                            sx={{ pb: 4, pt: 1 }}
+                            fullWidth
+                            variant="outlined"
+                            name="client"
+                            value={client}
+                            onChange={(e) => setClient(e.target.value)}
+                          />
+                          <Box>
+                            <Typography variant="h5">
+                              <Icon icon="foundation:torso-business" /> Manager:
+                            </Typography>
+                          </Box>
+                          <TextField
+                            disabled
+                            sx={{ pb: 4, pt: 1 }}
+                            fullWidth
+                            variant="outlined"
+                            name="manager"
+                            value={manager}
+                            onChange={(e) => setManager(e.target.value)}
+                          />
+                          <Box sx={{ pb: 1 }}>
+                            <Typography variant="h5">
+                              <Icon icon="foundation:torso-business" /> Starting
+                              date:
+                            </Typography>
+                          </Box>
+                          <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DesktopDatePicker
+                              disabled
+                              inputFormat="dd/MM/yyyy"
+                              value={dateD}
+                              onChange={(e) => setDateD(e)}
+                              renderInput={(params) => (
+                                <TextField {...params} />
+                              )}
                             />
-                          </Grid>
-                          <Grid item xs={6}>
-                            <TextField
-                              fullWidth
-                              name="number"
-                              label="best matches"
-                              variant="outlined"
+                          </LocalizationProvider>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Box sx={{ pb: 1 }}>
+                            <Typography variant="h5">
+                              <Icon icon="akar-icons:info" /> About:
+                            </Typography>
+                          </Box>
+                          <TextField
+                            disabled
+                            fullWidth
+                            multiline
+                            rows={12}
+                            variant="outlined"
+                            name="about"
+                            value={about}
+                            onChange={(e) => setAbout(e.target.value)}
+                          />
+                          <Box sx={{ pb: 1, pt: 4 }}>
+                            <Typography variant="h5">
+                              <Icon icon="foundation:torso-business" />{" "}
+                              Finishing date:
+                            </Typography>
+                          </Box>
+                          <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DesktopDatePicker
+                              disabled
+                              inputFormat="dd/MM/yyyy"
+                              value={dateF}
+                              onChange={(e) => setDateF(e)}
+                              renderInput={(params) => (
+                                <TextField {...params} />
+                              )}
                             />
-                          </Grid>
+                          </LocalizationProvider>
                         </Grid>
                       </Grid>
-                    </Grid>
-                  </Box>
-                </Card>
+                    </Box>
+                  </Card>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
+          </Box>
+        </Container>
+        <Box sx={{ p: 5 }}>
+          <Typography variant="h4">Staffing:</Typography>
+          <Match></Match>
         </Box>
-      </Container>
-      <Container>
-        <Grid margin={6} style={{ textAlign: "center" }}>
-          <Button size="large" variant="contained" color="primary">
-            CONFIRM
-          </Button>
-        </Grid>
-      </Container>
-    </Page>
+      </Page>
+    </div>
   );
+}
+
+export default function Project() {
+  const { id } = useParams();
+  const [res, setRes] = useState("not found");
+
+  useEffect(() => {
+    fetch("/Project/" + id, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: "",
+    })
+      .then((res) => {
+        if (res.ok) {
+          let response = res.text();
+
+          response.then((res) => {
+            let result = JSON.parse(res)["result"];
+            setRes(result);
+          });
+        }
+      })
+      .catch((_) => console.log("not sent"));
+  }, [id]);
+
+  return res !== "not found" ? <ProjectPage data={res} /> : <NotFound />;
 }

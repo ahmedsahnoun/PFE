@@ -1,198 +1,5 @@
 {
 	"tables": {
-		"70822e71-48bc-455b-bedb-87e2d0eda03c": {
-			"id": "70822e71-48bc-455b-bedb-87e2d0eda03c",
-			"visible": true,
-			"name": "Job",
-			"desc": "",
-			"estimatedSize": "",
-			"cols": [
-				{
-					"id": "2f8a1f0c-fdbe-414d-9473-a52fda85485f",
-					"name": "_id",
-					"datatype": "objectId",
-					"param": "",
-					"pk": true,
-					"nn": true,
-					"comment": "",
-					"defaultvalue": "",
-					"data": ""
-				},
-				{
-					"id": "ae09a64e-ea21-4ab0-b115-f400bd865ccc",
-					"name": "position",
-					"datatype": "string",
-					"param": "",
-					"pk": false,
-					"nn": false,
-					"comment": "",
-					"defaultvalue": "",
-					"data": "",
-					"list": false,
-					"enum": "",
-					"validate": ""
-				},
-				{
-					"id": "29a0aa1d-3788-46c4-b9e8-8abf051b0660",
-					"name": "location",
-					"datatype": "string",
-					"param": "",
-					"pk": false,
-					"nn": false,
-					"comment": "",
-					"defaultvalue": "",
-					"data": "",
-					"list": false,
-					"enum": "",
-					"validate": ""
-				},
-				{
-					"id": "f8316662-3bd1-422f-b464-48c43ea4b0a3",
-					"name": "skills",
-					"datatype": "string",
-					"param": "",
-					"pk": false,
-					"nn": false,
-					"comment": "",
-					"defaultvalue": "",
-					"data": "",
-					"list": true,
-					"enum": "",
-					"validate": ""
-				},
-				{
-					"id": "9ad44325-43c0-430f-88e5-de98da4db464",
-					"name": "languages",
-					"datatype": "string",
-					"param": "",
-					"pk": false,
-					"nn": false,
-					"comment": "",
-					"defaultvalue": "",
-					"data": "",
-					"list": true,
-					"enum": "",
-					"validate": ""
-				},
-				{
-					"id": "9e917f5c-4514-47e2-b514-47a6f84d8c7d",
-					"name": "description",
-					"datatype": "string",
-					"param": "",
-					"pk": false,
-					"nn": false,
-					"comment": "",
-					"defaultvalue": "",
-					"data": "",
-					"list": false,
-					"enum": "",
-					"validate": ""
-				},
-				{
-					"id": "c41a41cb-abf3-4972-9b27-a73e58b68419",
-					"name": "matches",
-					"datatype": "1c1c6831-371b-4a60-b4b2-159d23386fe2",
-					"param": "",
-					"pk": false,
-					"nn": false,
-					"comment": "",
-					"defaultvalue": "",
-					"data": "",
-					"list": true,
-					"enum": "",
-					"validate": "",
-					"pattern": false
-				}
-			],
-			"relations": [],
-			"lines": [
-				"0c273860-ae44-4558-9e73-c3ad187b0ce7",
-				"d9f577f7-f88e-4678-92ac-795808e9eb15"
-			],
-			"keys": [
-				{
-					"id": "bb5ea32e-bb34-4d11-b202-5558e33adac9",
-					"name": "Primary key",
-					"isPk": true,
-					"using": "na",
-					"cols": [
-						{
-							"id": "30abbfaf-267d-4f79-a529-aba14dafa20e",
-							"colid": "2f8a1f0c-fdbe-414d-9473-a52fda85485f"
-						}
-					]
-				}
-			],
-			"indexes": [],
-			"embeddable": false,
-			"generate": true,
-			"generateCustomCode": true,
-			"internalColumnIdRef": "",
-			"validationLevel": "na",
-			"validationAction": "na",
-			"collation": "",
-			"others": ""
-		},
-		"1c1c6831-371b-4a60-b4b2-159d23386fe2": {
-			"id": "1c1c6831-371b-4a60-b4b2-159d23386fe2",
-			"visible": true,
-			"name": "match",
-			"desc": "",
-			"estimatedSize": "",
-			"cols": [
-				{
-					"id": "d5b68585-c93a-4ace-b499-3fd57d53fca8",
-					"name": "score",
-					"datatype": "string",
-					"param": "",
-					"pk": false,
-					"nn": true,
-					"comment": "",
-					"defaultvalue": "",
-					"data": "",
-					"list": false,
-					"enum": "",
-					"validate": ""
-				},
-				{
-					"id": "82111821-af58-4d79-a470-4d4831b0f59e",
-					"name": "Resumes",
-					"datatype": "objectId",
-					"param": "",
-					"pk": false,
-					"nn": true,
-					"comment": "",
-					"defaultvalue": "",
-					"data": "",
-					"fk": true,
-					"ref": "Resumes"
-				}
-			],
-			"relations": [
-				"fe7de4be-193b-4d2d-ae68-956a0390e3ca"
-			],
-			"lines": [
-				"0c273860-ae44-4558-9e73-c3ad187b0ce7"
-			],
-			"keys": [
-				{
-					"id": "d7b37db5-e852-494d-b047-d3a94781b71d",
-					"name": "Primary key",
-					"isPk": true,
-					"using": "na",
-					"cols": []
-				}
-			],
-			"indexes": [],
-			"embeddable": true,
-			"generate": true,
-			"generateCustomCode": true,
-			"internalColumnIdRef": "",
-			"validationLevel": "na",
-			"validationAction": "na",
-			"collation": "",
-			"others": ""
-		},
 		"52b9183c-3813-4beb-8fce-4bb34e0c406e": {
 			"id": "52b9183c-3813-4beb-8fce-4bb34e0c406e",
 			"visible": false,
@@ -354,8 +161,8 @@
 					"validate": ""
 				},
 				{
-					"id": "a018e056-bb5c-4c89-be7c-4cef0c654f70",
-					"name": "category",
+					"id": "07bce79d-fa70-4e0c-8b67-7104e699780b",
+					"name": "source",
 					"datatype": "string",
 					"param": "",
 					"pk": false,
@@ -482,7 +289,7 @@
 		},
 		"3b78d2c0-657e-4fb0-b85a-636d7fe807dd": {
 			"id": "3b78d2c0-657e-4fb0-b85a-636d7fe807dd",
-			"visible": false,
+			"visible": true,
 			"name": "Job",
 			"desc": "",
 			"estimatedSize": "",
@@ -573,7 +380,10 @@
 				}
 			],
 			"relations": [],
-			"lines": [],
+			"lines": [
+				"56a64f01-ec38-4680-a0fe-ef9d72344bd0",
+				"15b62e03-07cc-4c56-af49-4eca3df1f731"
+			],
 			"keys": [
 				{
 					"id": "78c29a58-84ae-4987-b491-e81d868f0258",
@@ -698,7 +508,8 @@
 			],
 			"relations": [],
 			"lines": [
-				"d9f577f7-f88e-4678-92ac-795808e9eb15"
+				"d9f577f7-f88e-4678-92ac-795808e9eb15",
+				"15b62e03-07cc-4c56-af49-4eca3df1f731"
 			],
 			"keys": [
 				{
@@ -716,6 +527,67 @@
 			],
 			"indexes": [],
 			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"internalColumnIdRef": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": ""
+		},
+		"1c1c6831-371b-4a60-b4b2-159d23386fe2": {
+			"id": "1c1c6831-371b-4a60-b4b2-159d23386fe2",
+			"visible": true,
+			"name": "match",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "82111821-af58-4d79-a470-4d4831b0f59e",
+					"name": "Resumes",
+					"datatype": "objectId",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"fk": true,
+					"ref": "Resumes",
+					"pattern": true
+				},
+				{
+					"id": "d5b68585-c93a-4ace-b499-3fd57d53fca8",
+					"name": "score",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				}
+			],
+			"relations": [
+				"fe7de4be-193b-4d2d-ae68-956a0390e3ca"
+			],
+			"lines": [
+				"56a64f01-ec38-4680-a0fe-ef9d72344bd0"
+			],
+			"keys": [
+				{
+					"id": "d7b37db5-e852-494d-b047-d3a94781b71d",
+					"name": "Primary key",
+					"isPk": true,
+					"using": "na",
+					"cols": []
+				}
+			],
+			"indexes": [],
+			"embeddable": true,
 			"generate": true,
 			"generateCustomCode": true,
 			"internalColumnIdRef": "",
@@ -754,20 +626,6 @@
 	},
 	"notes": {},
 	"lines": {
-		"0c273860-ae44-4558-9e73-c3ad187b0ce7": {
-			"id": "0c273860-ae44-4558-9e73-c3ad187b0ce7",
-			"visible": true,
-			"name": "match-JobOffer",
-			"desc": "",
-			"style": "solid",
-			"parent": "1c1c6831-371b-4a60-b4b2-159d23386fe2",
-			"child": "70822e71-48bc-455b-bedb-87e2d0eda03c",
-			"lineColor": "transparent",
-			"markerStart": "none",
-			"markerEnd": "arrowEnd",
-			"linegraphics": "basic",
-			"generate": true
-		},
 		"d9f577f7-f88e-4678-92ac-795808e9eb15": {
 			"id": "d9f577f7-f88e-4678-92ac-795808e9eb15",
 			"visible": true,
@@ -775,6 +633,34 @@
 			"desc": "",
 			"style": "solid",
 			"parent": "70822e71-48bc-455b-bedb-87e2d0eda03c",
+			"child": "112f7d4d-edd1-4523-a189-29e7bea67a5f",
+			"lineColor": "transparent",
+			"markerStart": "none",
+			"markerEnd": "arrowEnd",
+			"linegraphics": "basic",
+			"generate": true
+		},
+		"56a64f01-ec38-4680-a0fe-ef9d72344bd0": {
+			"id": "56a64f01-ec38-4680-a0fe-ef9d72344bd0",
+			"visible": true,
+			"name": "match-Job",
+			"desc": "",
+			"style": "solid",
+			"parent": "1c1c6831-371b-4a60-b4b2-159d23386fe2",
+			"child": "3b78d2c0-657e-4fb0-b85a-636d7fe807dd",
+			"lineColor": "transparent",
+			"markerStart": "none",
+			"markerEnd": "arrowEnd",
+			"linegraphics": "basic",
+			"generate": true
+		},
+		"15b62e03-07cc-4c56-af49-4eca3df1f731": {
+			"id": "15b62e03-07cc-4c56-af49-4eca3df1f731",
+			"visible": true,
+			"name": "Job-Project",
+			"desc": "",
+			"style": "solid",
+			"parent": "3b78d2c0-657e-4fb0-b85a-636d7fe807dd",
 			"child": "112f7d4d-edd1-4523-a189-29e7bea67a5f",
 			"lineColor": "transparent",
 			"markerStart": "none",
@@ -796,7 +682,7 @@
 		"replaceSpace": "_",
 		"color": "transparent",
 		"sideSelections": true,
-		"isDirty": false,
+		"isDirty": true,
 		"storedin": {
 			"major": 4,
 			"minor": 5,
@@ -812,7 +698,7 @@
 		"def_validationAction": "na",
 		"def_collation": "",
 		"def_others": "",
-		"lastSaved": "Mon Mar 21 2022 15:12:01 GMT+0100 (GMT+01:00)"
+		"lastSaved": "Fri May 06 2022 11:25:35 GMT+0100 (GMT+01:00)"
 	},
 	"otherObjects": {},
 	"diagrams": {
@@ -828,28 +714,6 @@
 			"isOpen": true,
 			"main": true,
 			"diagramItems": {
-				"70822e71-48bc-455b-bedb-87e2d0eda03c": {
-					"referencedItemId": "70822e71-48bc-455b-bedb-87e2d0eda03c",
-					"x": 157,
-					"y": 445,
-					"gHeight": 187,
-					"gWidth": 229,
-					"color": "#ffffff",
-					"background": "#03a9f4",
-					"resized": false,
-					"autoExpand": true
-				},
-				"1c1c6831-371b-4a60-b4b2-159d23386fe2": {
-					"referencedItemId": "1c1c6831-371b-4a60-b4b2-159d23386fe2",
-					"x": 525,
-					"y": 709,
-					"gHeight": 62,
-					"gWidth": 207,
-					"color": "#ffffff",
-					"background": "#8bc34a",
-					"resized": false,
-					"autoExpand": true
-				},
 				"52b9183c-3813-4beb-8fce-4bb34e0c406e": {
 					"referencedItemId": "52b9183c-3813-4beb-8fce-4bb34e0c406e",
 					"x": 898,
@@ -863,8 +727,8 @@
 				},
 				"f8db035c-f796-42c8-a293-010d3abb064d": {
 					"referencedItemId": "f8db035c-f796-42c8-a293-010d3abb064d",
-					"x": 870,
-					"y": 328,
+					"x": 980,
+					"y": 89,
 					"gHeight": 313,
 					"gWidth": 250,
 					"color": "#ffffff",
@@ -874,10 +738,10 @@
 				},
 				"3b78d2c0-657e-4fb0-b85a-636d7fe807dd": {
 					"referencedItemId": "3b78d2c0-657e-4fb0-b85a-636d7fe807dd",
-					"x": 150,
-					"y": 132,
-					"gHeight": 151,
-					"gWidth": 191,
+					"x": 450,
+					"y": 152,
+					"gHeight": 169,
+					"gWidth": 229,
 					"color": "#ffffff",
 					"background": "#8bc34a",
 					"resized": false,
@@ -885,12 +749,23 @@
 				},
 				"112f7d4d-edd1-4523-a189-29e7bea67a5f": {
 					"referencedItemId": "112f7d4d-edd1-4523-a189-29e7bea67a5f",
-					"x": 505,
-					"y": 191,
+					"x": 123,
+					"y": 85,
 					"gHeight": 294,
 					"gWidth": 251,
 					"color": "#ffffff",
 					"background": "#03a9f4",
+					"resized": false,
+					"autoExpand": true
+				},
+				"1c1c6831-371b-4a60-b4b2-159d23386fe2": {
+					"referencedItemId": "1c1c6831-371b-4a60-b4b2-159d23386fe2",
+					"x": 717,
+					"y": 204,
+					"gHeight": 62,
+					"gWidth": 207,
+					"color": "#ffffff",
+					"background": "#8bc34a",
 					"resized": false,
 					"autoExpand": true
 				}

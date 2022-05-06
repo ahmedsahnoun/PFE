@@ -190,8 +190,8 @@ export default function JobForm({ template, setTemplate, onSubmit, hasAdd=true, 
   return (
     <form onSubmit={onSubmit}>
       {renderer({ template })}
-      {hasAdd ? add() : <></>}
-      {hasConfirm ? confirm() : <></>}
+      {hasAdd && add()}
+      {hasConfirm && confirm()}
     </form>
   );
 }

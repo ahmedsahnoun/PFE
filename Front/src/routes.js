@@ -11,11 +11,11 @@ import Resume from './pages/Resume';
 // import Register from './pages/Register';
 // import Products from './pages/Products';
 // import Blog from './pages/Blog';
-import User from './pages/User'; 
+// import User from './pages/User'; 
 import NotFound from './pages/Page404';
 import Newproject from './pages/NewProject';
 import Project from './pages/Project';
-import Projects from './pages/Projects';
+import ProjectTable from './pages/ProjectTable';
 
 // ----------------------------------------------------------------------
 
@@ -28,16 +28,16 @@ export default function Router() {
         // { path: '/', element: <Navigate to="/dashboard/app" /> },
         // { path: 'login', element: <Login /> },
         // { path: 'register', element: <Register /> },
+        // { path: 'User', element: <User /> },
         { path: 'app', element: <DashboardApp /> },
         { path: 'JobList', element: <JobList /> },
         { path: '404', element: <NotFound /> },
         { path: 'NewJob', element: <NewJob /> },
-        { path: 'User', element: <User /> },
-        { path: 'NewProject', element: <Newproject Title="New Project" /> },
-        { path: 'Project', element: <Project Title="Project" /> },
-        { path: 'Projects', element: <Projects Title="Project" /> },
-        { path: 'Resume', element: <Resume /> },
-        { path: '*', element: <Navigate to="/404" /> }
+        { path: 'NewProject', element: <Newproject/> },
+        { path: 'Project/:id', element: <Project/> },
+        { path: 'Projects', element: <ProjectTable /> },
+        { path: 'Resume/:id', element: <Resume /> },
+        { path: '*', element: <NotFound/> }
       ]
     },
     { path: '*', element: <Navigate to="/404" replace /> }

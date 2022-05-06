@@ -23,6 +23,7 @@ import Label from "../components/Label";
 import Scrollbar from "../components/Scrollbar";
 import Iconify from "../components/Iconify";
 import SearchNotFound from "../components/SearchNotFound";
+import CircularProgress from "@mui/material/CircularProgress";
 import {
   UserListHead,
   UserListToolbar,
@@ -35,9 +36,11 @@ import { useEffect } from "react";
 const TABLE_HEAD = [
   { id: "title", label: "Title", alignRight: false },
   { id: "dateD", label: "Start date", alignRight: false },
-  { id: "Datef", label: "Finish date", alignRight: false },
-  { id: "about", label: "About", alignRight: false },
+  { id: "datef", label: "Finish date", alignRight: false },
+  { id: "client", label: "Client", alignRight: false },
+  { id: "manager", label: "Manager", alignRight: false },
   { id: "status", label: "Status", alignRight: false },
+  { id: "" },
   { id: "" },
 ];
 
@@ -77,6 +80,7 @@ function applySortFilter(array, comparator, query) {
 
 export default function ProjectTable() {
   const [USERLIST, setUSERLIST] = useState([]);
+  const [loading, setloading] = useState(false);
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState("asc");
   const [selected, setSelected] = useState([]);
@@ -142,28 +146,33 @@ export default function ProjectTable() {
   const isUserNotFound = filteredUsers.length === 0;
 
   const refreshTable = () => {
-   fetch("/Projects", {
-     method: "POST",
-     headers: {
-       "Content-type": "application/json",
-     },
-     body: "",
-   })
-     .then((res) => {
-       if (res.ok) {
-         let response = res.text();
- 
-         response.then((res) => {
-           let result = JSON.parse(res)["result"];
-           setUSERLIST(result);
-         });
-       }
-     })
-     .catch((_) => console.log("not sent"));
-  }
+    setloading(true);
+    fetch("/Projects", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: "",
+    })
+      .then((res) => {
+        if (res.ok) {
+          let response = res.text();
+
+          response.then((res) => {
+            let result = JSON.parse(res)["result"];
+            setUSERLIST(result);
+            setloading(false);
+          });
+        }
+      })
+      .catch((_) => console.log("not sent"));
+  };
+
+  useEffect(() => {
+    refreshTable();
+  }, []);
 
   const Delete = (input) => {
-    console.log(selected);
     fetch("/DeleteProjects", {
       method: "POST",
       headers: {
@@ -176,141 +185,172 @@ export default function ProjectTable() {
           let response = res.text();
 
           response.then((res) => {
-            let result = JSON.parse(res)["result"];
-            console.log(result)
+            // let result = JSON.parse(res)["result"];
+            // console.log(result);
           });
         }
       })
       .catch((_) => console.log("not sent"));
 
-    refreshTable()
-    setSelected([])
+    refreshTable();
+    setSelected([]);
   };
-
-  useEffect(() => {
-    refreshTable()
-  }, []);
-
   return (
-    <Page title="User | Minimal-UI">
-      <Container maxWidth="xl">
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          mb={5}
-        >
-          <Typography variant="h4" gutterBottom>
-            Projects
-          </Typography>
-          <Button
-            variant="contained"
-            component={RouterLink}
-            to="/NewProject"
-            startIcon={<Iconify icon="eva:plus-fill" />}
+    <div>
+      <Page title="Projects">
+        <Typography variant="h3" align="right" sx={{ color: "white", pr: 8 }}>
+          Projects {loading && "loading"}
+        </Typography>
+        <Container maxWidth="xl">
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            mb={5}
           >
-            New Project
-          </Button>
-        </Stack>
+            <Button
+              align="left"
+              variant="contained"
+              component={RouterLink}
+              to="/NewProject"
+              startIcon={<Iconify icon="eva:plus-fill" />}
+            >
+              New Project
+            </Button>
+          </Stack>
+          <Card sx={{ boxShadow: 8 }}>
+            <UserListToolbar
+              numSelected={selected.length}
+              filterName={filterName}
+              onFilterName={handleFilterByName}
+              onDeleteMany={() => Delete(selected)}
+            />
 
-        <Card sx={{ boxShadow: 8 }}>
-          <UserListToolbar
-            numSelected={selected.length}
-            filterName={filterName}
-            onFilterName={handleFilterByName}
-            onDeleteMany={() => Delete(selected)}
-          />
-
-          <Scrollbar>
-            <TableContainer sx={{ minWidth: 800 }}>
-              <Table>
-                <UserListHead
-                  order={order}
-                  orderBy={orderBy}
-                  headLabel={TABLE_HEAD}
-                  rowCount={USERLIST.length}
-                  numSelected={selected.length}
-                  onRequestSort={handleRequestSort}
-                  onSelectAllClick={handleSelectAllClick}
-                />
-                <TableBody>
-                  {filteredUsers
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => {
-                      const isItemSelected = selected.indexOf(row._id) !== -1;
-
-                      return (
-                        <TableRow
-                          hover
-                          key={row._id}
-                          tabIndex={-1}
-                          role="checkbox"
-                          selected={isItemSelected}
-                          aria-checked={isItemSelected}
-                        >
-                          <TableCell padding="checkbox">
-                            <Checkbox
-                              checked={isItemSelected}
-                              onChange={(event) => handleClick(event, row._id)}
-                            />
-                          </TableCell>
-                          <TableCell align="left">{row.title}</TableCell>
-                          <TableCell align="left">
-                            {row.dateD.substring(0, 10)}
-                          </TableCell>
-                          <TableCell align="left">
-                            {row.dateF.substring(0, 10)}
-                          </TableCell>
-                          <TableCell align="left">
-                            {true ? "Yes" : "No"}
-                          </TableCell>
-                          <TableCell align="left">
-                            <Label
-                              variant="ghost"
-                              color={
-                                ("help" === "banned" && "error") || "success"
-                              }
+            <Scrollbar>
+              <TableContainer sx={{ minWidth: 800 }}>
+                <Table>
+                  <UserListHead
+                    order={order}
+                    orderBy={orderBy}
+                    headLabel={TABLE_HEAD}
+                    rowCount={USERLIST.length}
+                    numSelected={selected.length}
+                    onRequestSort={handleRequestSort}
+                    onSelectAllClick={handleSelectAllClick}
+                  />
+                  {loading ? (
+                    <TableBody>
+                      <TableRow>
+                        <TableCell colSpan="100%">
+                          <CircularProgress
+                            sx={{
+                              position: "relative",
+                              left: "50%",
+                              top: "50%",
+                            }}
+                          />
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  ) : (
+                    <TableBody>
+                      {filteredUsers
+                        .slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                        .map((row) => {
+                          const isItemSelected =
+                            selected.indexOf(row._id) !== -1;
+                          return (
+                            <TableRow
+                              key={row._id}
+                              hover
+                              tabIndex={-1}
+                              role="checkbox"
+                              selected={isItemSelected}
+                              aria-checked={isItemSelected}
                             >
-                              {sentenceCase("help")}
-                            </Label>
-                          </TableCell>
-
-                          <TableCell align="right">
-                            <UserMoreMenu onDelete={()=>Delete([row._id])} />
-                          </TableCell>
+                              <TableCell padding="checkbox">
+                                <Checkbox
+                                  checked={isItemSelected}
+                                  onChange={(event) =>
+                                    handleClick(event, row._id)
+                                  }
+                                />
+                              </TableCell>
+                              <TableCell align="left">{row.title}</TableCell>
+                              <TableCell align="left">
+                                {row.dateD.substring(0, 10)}
+                              </TableCell>
+                              <TableCell align="left">
+                                {row.dateF.substring(0, 10)}
+                              </TableCell>
+                              <TableCell align="left">{row.client}</TableCell>
+                              <TableCell align="left">{row.manager}</TableCell>
+                              <TableCell align="left">
+                                <Label
+                                  variant="ghost"
+                                  color={
+                                    ("help" === "banned" && "error") ||
+                                    "success"
+                                  }
+                                >
+                                  {sentenceCase("heeelp")}
+                                </Label>
+                              </TableCell>
+                              <TableCell align="left">
+                                <Button
+                                  variant="contained"
+                                  component={RouterLink}
+                                  to={"/Project/" + row._id}
+                                  startIcon={
+                                    <Iconify icon="fa-solid:sign-out-alt" />
+                                  }
+                                >
+                                  Access
+                                </Button>
+                              </TableCell>
+                              <TableCell align="right">
+                                <UserMoreMenu
+                                  onDelete={() => Delete([row._id])}
+                                />
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
+                      {emptyRows > 0 && (
+                        <TableRow style={{ height: 53 * emptyRows }}>
+                          <TableCell colSpan={6} />
                         </TableRow>
-                      );
-                    })}
-                  {emptyRows > 0 && (
-                    <TableRow style={{ height: 53 * emptyRows }}>
-                      <TableCell colSpan={6} />
-                    </TableRow>
+                      )}
+                    </TableBody>
                   )}
-                </TableBody>
-                {isUserNotFound && (
-                  <TableBody>
-                    <TableRow>
-                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
-                        <SearchNotFound searchQuery={filterName} />
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                )}
-              </Table>
-            </TableContainer>
-          </Scrollbar>
+                  {isUserNotFound && (
+                    <TableBody>
+                      <TableRow>
+                        <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                          <SearchNotFound searchQuery={filterName} />
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  )}
+                </Table>
+              </TableContainer>
+            </Scrollbar>
 
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={USERLIST.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Card>
-      </Container>
-    </Page>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={USERLIST.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Card>
+        </Container>
+      </Page>
+    </div>
   );
 }

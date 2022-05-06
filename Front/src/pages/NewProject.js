@@ -15,10 +15,18 @@ import MuiAlert from "@mui/material/Alert";
 // components
 import Page from "../components/Page";
 import { useState } from "react";
+import React from 'react';
+// import { useNavigate } from "react-router-dom";
 import JobForm from "./JobForm";
 // ----------------------------------------------------------------------
 
-export default function Newproject({ Title }) {
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+export default function Newproject() {
+  // let navigate = useNavigate();
+
   const job = [{ position: "", skills: [], location: "", about: "" }];
 
   const [error, setError] = useState(false);
@@ -36,35 +44,10 @@ export default function Newproject({ Title }) {
     title: title,
     client: client,
     manager: manager,
-    dateD: dateD,
-    dateF: dateF,
+    dateD: dateD.toISOString().split("T")[0],
+    dateF: dateF.toISOString().split("T")[0],
     about: about,
     jobs: jobs,
-  };
-
-  const access = (id) => {
-    // window.location.href = "/NewJob";
-    // let id = "62599b8a19f9482d5dc1fdf7";
-    fetch("/Project/" + id, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(project),
-    })
-      .then((res) => {
-        if (res.ok) {
-          console.log("sent");
-
-          let response = res.text();
-
-          response.then((res) => {
-            let result = JSON.parse(res)["result"];
-            console.log(result);
-          });
-        }
-      })
-      .catch((_) => console.log("not sent"));
   };
 
   const handleSubmit = (e) => {
@@ -81,12 +64,11 @@ export default function Newproject({ Title }) {
           setSuccess(true);
 
           let response = res.text();
-          console.log(response);
 
           response.then((res) => {
             let result = JSON.parse(res)["result"];
             console.log(result);
-            access(result);
+            // if (result !=='fail') {navigate("../Project/"+result, { replace: true })}
           });
         } else {
           setError(true);
@@ -97,7 +79,12 @@ export default function Newproject({ Title }) {
 
   return (
     <div>
-      <Page title={Title}>
+      <Page title="New project">
+        <Box sx={{ pr: 8 }}>
+          <Typography variant="h3" align="right" sx={{ color: "white" }}>
+            New Project
+          </Typography>
+        </Box>
         <Box sx={{ p: 5 }}>
           <Typography variant="h4">Details:</Typography>
         </Box>
@@ -107,18 +94,18 @@ export default function Newproject({ Title }) {
             autoHideDuration={3000}
             onClose={() => setSuccess(false)}
           >
-            <MuiAlert severity="success" sx={{ width: "100%" }}>
+            <Alert  severity="success" sx={{ width: "100%" }}>
               Success
-            </MuiAlert>
+            </Alert >
           </Snackbar>
           <Snackbar
             open={error}
             autoHideDuration={3000}
             onClose={() => setError(false)}
           >
-            <MuiAlert severity="error" sx={{ width: "100%" }}>
+            <Alert severity="error" sx={{ width: "100%" }}>
               Error. Please retry
-            </MuiAlert>
+            </Alert>
           </Snackbar>
           <Box sx={{ p: 3 }}>
             <Grid container spacing={3}>
@@ -178,7 +165,11 @@ export default function Newproject({ Title }) {
                             <DesktopDatePicker
                               inputFormat="dd/MM/yyyy"
                               value={dateD}
-                              onChange={(e) => setDateD(e)}
+                              format="YYYY-MM-DD"
+                              onChange={(e) => {
+                                setDateD(e);
+                                console.log(dateD);
+                              }}
                               renderInput={(params) => (
                                 <TextField {...params} />
                               )}

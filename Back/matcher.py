@@ -27,9 +27,9 @@ class matcher:
 
 		indices = (matches[0]).argsort()[:n].tolist()
 		distances = [matches[0][i] for i in indices]
-		scores = [1/(1+log(1+matches[0][i]))*100 for i in indices]
+		scores = [1/(1+matches[0][i]**2)*100 for i in indices]
 
-		result = {'indices':indices, 'distances':distances, 'scores':scores, }
+		result = {'indices':indices, 'distances':distances, 'scores':scores }
 
 		return(result)
 
