@@ -1,5 +1,4 @@
 import { filter } from "lodash";
-import { sentenceCase } from "change-case";
 import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 // material
@@ -19,7 +18,8 @@ import {
 } from "@mui/material";
 // components
 import Page from "../components/Page";
-import Label from "../components/Label";
+// import { sentenceCase } from "change-case";
+// import Label from "../components/Label";
 import Scrollbar from "../components/Scrollbar";
 import Iconify from "../components/Iconify";
 import SearchNotFound from "../components/SearchNotFound";
@@ -39,7 +39,7 @@ const TABLE_HEAD = [
   { id: "datef", label: "Finish date", alignRight: false },
   { id: "client", label: "Client", alignRight: false },
   { id: "manager", label: "Manager", alignRight: false },
-  { id: "status", label: "Status", alignRight: false },
+  // { id: "status", label: "Status", alignRight: false },
   { id: "" },
   { id: "" },
 ];
@@ -288,7 +288,7 @@ export default function ProjectTable() {
                               </TableCell>
                               <TableCell align="left">{row.client}</TableCell>
                               <TableCell align="left">{row.manager}</TableCell>
-                              <TableCell align="left">
+                              {/* <TableCell align="left">
                                 <Label
                                   variant="ghost"
                                   color={
@@ -298,7 +298,7 @@ export default function ProjectTable() {
                                 >
                                   {sentenceCase("heeelp")}
                                 </Label>
-                              </TableCell>
+                              </TableCell> */}
                               <TableCell align="left">
                                 <Button
                                   variant="contained"

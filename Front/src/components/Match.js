@@ -15,9 +15,10 @@ import { useEffect, useState } from "react";
 import Score from "./Score";
 import { Link as RouterLink } from "react-router-dom";
 import Iconify from "../components/Iconify";
-import talanlogo from "../theme/logo-talan.png";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import talanlogo from "../theme/logo-talan.png";
+import weblogo from "../theme/logo-web.png";
 
 export default function AlertDialog(props) {
   const [open, setOpen] = useState(false);
@@ -36,7 +37,7 @@ export default function AlertDialog(props) {
   useEffect(() => {
     let input = {
       n: number,
-      job: "java c++",
+      job: "'Java', 'JEE', 'SQL', 'Python', 'machine learning', 'Raspberry Pi', 'c', 'Spring Boot', 'MongoDB', 'Leadership', 'Raspberry', 'Pi'",
     };
     fetch("/Matching", {
       method: "POST",
@@ -121,28 +122,27 @@ export default function AlertDialog(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title" sx={{ align: "right" }}>
+        <DialogTitle id="alert-dialog-title">
           Matches:
         </DialogTitle>
-        <Grid container spacing={3}>
-          <Grid Item xs='auto'></Grid>
-          <Grid Item>
-            Number of rows:
-            <Select onChange={(e) => setNumber(e.target.value)}>
-              <MenuItem value={5} default> 5</MenuItem>
-              <MenuItem value={10}> 10</MenuItem>
-              <MenuItem value={15}> 15</MenuItem>
-              <MenuItem value={20}> 20</MenuItem>
-            </Select>
-          </Grid>
+        <Grid sx={{ alignSelf: "flex-end" , pr:3 , pd:2}}>
+          Number of rows:
+          <Select onChange={(e) => setNumber(e.target.value)}>
+            <MenuItem value={5} default>
+              5
+            </MenuItem>
+            <MenuItem value={10}> 10</MenuItem>
+            <MenuItem value={15}> 15</MenuItem>
+            <MenuItem value={20}> 20</MenuItem>
+          </Select>
         </Grid>
         <DialogContent>
           <Grid container spacing={3}>
             <Grid item xs={6}>
-              <Views row={matches} bg={talanlogo} />
+              <Views row={matches.slice(0, 10)} bg={talanlogo} />
             </Grid>
             <Grid item xs={6}>
-              <Views row={matches} source={true} />
+              <Views row={matches.slice(10, 20)} bg={weblogo} source={true} />
             </Grid>
           </Grid>
         </DialogContent>
