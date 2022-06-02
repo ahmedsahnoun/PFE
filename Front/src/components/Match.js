@@ -19,12 +19,14 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import talanlogo from "../theme/logo-talan.png";
 import weblogo from "../theme/logo-web.png";
+import { useParams } from "react-router-dom";
 
 export default function AlertDialog(props) {
+  const { id } = useParams();
   const [open, setOpen] = useState(false);
   const [number, setNumber] = useState(5);
   // const [job, setJob] = useState();
-  const [matches, setMatches] = useState([]);
+  const [matches, setMatches] = useState();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -35,16 +37,12 @@ export default function AlertDialog(props) {
   };
 
   useEffect(() => {
-    let input = {
-      n: number,
-      job: "'Java', 'JEE', 'SQL', 'Python', 'machine learning', 'Raspberry Pi', 'c', 'Spring Boot', 'MongoDB', 'Leadership', 'Raspberry', 'Pi'",
-    };
-    fetch("/Matching", {
+    fetch("/Matching/" + id, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify(input),
+      body: JSON.stringify(id),
     })
       .then((res) => {
         if (res.ok) {
@@ -57,7 +55,7 @@ export default function AlertDialog(props) {
         }
       })
       .catch((_) => console.log("not sent"));
-  }, [number]);
+  }, [id]);
 
   function Views(props) {
     return (
@@ -115,41 +113,49 @@ export default function AlertDialog(props) {
       <Button variant="outlined" onClick={handleClickOpen}>
         View matches
       </Button>
-      <Dialog
-        maxWidth={false}
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          Matches:
-        </DialogTitle>
-        <Grid sx={{ alignSelf: "flex-end" , pr:3 , pd:2}}>
-          Number of rows:
-          <Select onChange={(e) => setNumber(e.target.value)}>
-            <MenuItem value={5} default>
-              5
-            </MenuItem>
-            <MenuItem value={10}> 10</MenuItem>
-            <MenuItem value={15}> 15</MenuItem>
-            <MenuItem value={20}> 20</MenuItem>
-          </Select>
-        </Grid>
-        <DialogContent>
-          <Grid container spacing={3}>
-            <Grid item xs={6}>
-              <Views row={matches.slice(0, 10)} bg={talanlogo} />
-            </Grid>
-            <Grid item xs={6}>
-              <Views row={matches.slice(10, 20)} bg={weblogo} source={true} />
-            </Grid>
+      {matches && (
+        <Dialog
+          maxWidth={false}
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">Matches:</DialogTitle>
+          <Grid sx={{ alignSelf: "flex-end", pr: 3, pd: 2 }}>
+            Number of rows:
+            <Select
+              defaultValue={number}
+              onChange={(e) => setNumber(e.target.value)}
+            >
+              <MenuItem value={5}>5</MenuItem>
+              <MenuItem value={10}> 10</MenuItem>
+              <MenuItem value={15}> 15</MenuItem>
+              <MenuItem value={20}> 20</MenuItem>
+            </Select>
           </Grid>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-        </DialogActions>
-      </Dialog>
+          <DialogContent>
+            <Grid container spacing={3}>
+              <Grid item xs={6}>
+                <Views
+                  row={matches[props.index]["matches_talan"].slice(0, number)}
+                  bg={talanlogo}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <Views
+                  row={matches[props.index]["matches"].slice(0, number)}
+                  bg={weblogo}
+                  source={true}
+                />
+              </Grid>
+            </Grid>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Close</Button>
+          </DialogActions>
+        </Dialog>
+      )}
     </div>
   );
 }

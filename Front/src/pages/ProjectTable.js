@@ -161,11 +161,11 @@ export default function ProjectTable() {
           response.then((res) => {
             let result = JSON.parse(res)["result"];
             setUSERLIST(result);
-            setloading(false);
           });
         }
       })
       .catch((_) => console.log("not sent"));
+      setloading(false);
   };
 
   useEffect(() => {
@@ -199,7 +199,7 @@ export default function ProjectTable() {
     <div>
       <Page title="Projects">
         <Typography variant="h3" align="right" sx={{ color: "white", pr: 8 }}>
-          Projects {loading && "loading"}
+          Projects
         </Typography>
         <Container maxWidth="xl">
           <Stack
@@ -281,10 +281,10 @@ export default function ProjectTable() {
                               </TableCell>
                               <TableCell align="left">{row.title}</TableCell>
                               <TableCell align="left">
-                                {row.dateD.substring(0, 10)}
+                                {row.dateD}
                               </TableCell>
                               <TableCell align="left">
-                                {row.dateF.substring(0, 10)}
+                                {row.dateF}
                               </TableCell>
                               <TableCell align="left">{row.client}</TableCell>
                               <TableCell align="left">{row.manager}</TableCell>
@@ -314,6 +314,7 @@ export default function ProjectTable() {
                               <TableCell align="right">
                                 <UserMoreMenu
                                   onDelete={() => Delete([row._id])}
+                                  update={"Update/" + row._id }
                                 />
                               </TableCell>
                             </TableRow>

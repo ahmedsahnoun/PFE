@@ -12,12 +12,14 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import Iconify from "../components/Iconify";
 // components
 import Page from "../components/Page";
 import { useState } from "react";
-import React from 'react';
+import React from "react";
 // import { useNavigate } from "react-router-dom";
 import JobForm from "./JobForm";
+import Fab from "@mui/material/Fab";
 // ----------------------------------------------------------------------
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -27,12 +29,12 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export default function Newproject() {
   // let navigate = useNavigate();
 
-  const job = [{ position: "", skills: [], location: "", about: "" }];
-
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const [jobs, setJobs] = useState(job);
+  const [jobs, setJobs] = useState([
+    { position: "", skills: [], location: "", about: "", languages: [] },
+  ]);
   const [title, setTitle] = useState("");
   const [manager, setManager] = useState("");
   const [client, setClient] = useState("");
@@ -94,9 +96,9 @@ export default function Newproject() {
             autoHideDuration={3000}
             onClose={() => setSuccess(false)}
           >
-            <Alert  severity="success" sx={{ width: "100%" }}>
+            <Alert severity="success" sx={{ width: "100%" }}>
               Success
-            </Alert >
+            </Alert>
           </Snackbar>
           <Snackbar
             open={error}
@@ -166,10 +168,7 @@ export default function Newproject() {
                               inputFormat="dd/MM/yyyy"
                               value={dateD}
                               format="YYYY-MM-DD"
-                              onChange={(e) => {
-                                setDateD(e);
-                                console.log(dateD);
-                              }}
+                              onChange={(e) => setDateD(e)}
                               renderInput={(params) => (
                                 <TextField {...params} />
                               )}
@@ -220,11 +219,39 @@ export default function Newproject() {
           <Typography variant="h4">Staffing:</Typography>
         </Box>
         <JobForm
+          hasDelete
+          hasConfirm
           template={jobs}
           setTemplate={setJobs}
           onSubmit={handleSubmit}
         />
       </Page>
+
+      <Fab
+        variant="extended"
+        sx={{
+          position: "fixed",
+          bottom: "2rem",
+          right: "2rem",
+          fontSize: "5",
+        }}
+        color="primary"
+        aria-label="add"
+        onClick={() =>
+          setJobs([
+            ...jobs,
+            {
+              position: "",
+              skills: [],
+              about: "",
+              location: "",
+              languages: [],
+            },
+          ])
+        }
+      >
+        <Iconify icon="eva:plus-fill" /> ADD
+      </Fab>
     </div>
   );
 }

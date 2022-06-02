@@ -1,0 +1,2 @@
+
+	os.remove("test.pdf")

@@ -5,29 +5,32 @@ import {
   Typography,
   TextField,
   Card,
+  Button,
 } from "@mui/material";
 import { Icon } from "@iconify/react";
+import { Link as RouterLink } from "react-router-dom";
+import Iconify from "../components/Iconify";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 // components
 import Page from "../components/Page";
-import Match from "../components/Match";
 // components
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import NotFound from "./Page404";
+import JobForm from "./JobForm";
 // ----------------------------------------------------------------------
 
 function ProjectPage(props) {
   let data = props.data;
-  // const [jobs, setJobs] = useState();
   const [title, setTitle] = useState(data.title);
   const [manager, setManager] = useState(data.manager);
   const [client, setClient] = useState(data.client);
   const [about, setAbout] = useState(data.about);
   const [dateD, setDateD] = useState(data.dateD);
   const [dateF, setDateF] = useState(data.dateF);
+  const [jobs, setJobs] = useState(data.jobs);
 
   return (
     <div>
@@ -35,6 +38,17 @@ function ProjectPage(props) {
         <Typography variant="h3" align="right" sx={{ color: "white", pr: 8 }}>
           Project
         </Typography>
+        <Box sx={{ pl: 3 }}>
+          <Button
+            align="left"
+            variant="contained"
+            component={RouterLink}
+            to={"/Update/"+ props.id}
+            startIcon={<Iconify icon="icon-park-twotone:write" />}
+          >
+            Update
+          </Button>
+        </Box>
         <Box sx={{ p: 5 }}>
           <Typography variant="h4">Details:</Typography>
         </Box>
@@ -152,8 +166,13 @@ function ProjectPage(props) {
         </Container>
         <Box sx={{ p: 5 }}>
           <Typography variant="h4">Staffing:</Typography>
-          <Match></Match>
         </Box>
+        <JobForm
+          disabled={true}
+          hasMatches
+          template={jobs}
+          setTemplate={setJobs}
+        />
       </Page>
     </div>
   );
@@ -184,5 +203,5 @@ export default function Project() {
       .catch((_) => console.log("not sent"));
   }, [id]);
 
-  return res !== "not found" ? <ProjectPage data={res} /> : <NotFound />;
+  return res !== "not found" ? <ProjectPage data={res} id={id} /> : <NotFound />;
 }

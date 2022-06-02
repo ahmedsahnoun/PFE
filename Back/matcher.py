@@ -1,19 +1,21 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.preprocessing import normalize
 from scipy.sparse import lil_matrix
-from sklearn.metrics.pairwise import euclidean_distances
-from math import log
+from sklearn.metrics.pairwise import euclidean_distances, cosine_similarity
+from utils import *
 
 class matcher:
 	
 	vectorizer = TfidfVectorizer()
 	matrix = None
+	ids = None
 
-	def train(self,Resumes):
+	def train(self,Resumes,ids):
 		self.vectorizer.fit(Resumes)
 		self.matrix = self.vectorizer.transform(Resumes)
+		self.ids = ids
 
-
-	def top_matches(self,job_offer_description,n):
+	def top_matches(self,job_offer_description):
 		job_offer = self.vectorizer.transform([job_offer_description])
 
 		sparseMatrix = lil_matrix((self.matrix.shape[0], self.matrix.shape[1]))
@@ -21,28 +23,13 @@ class matcher:
 		for i in job_offer.indices:
 			sparseMatrix[:,i] = self.matrix[:,i]
 
-		sparseMatrix
+		distances = cosine_similarity(job_offer,sparseMatrix)
+		indices = (-distances[0]).argsort().tolist()
+		result = [{'_id' : str(self.ids[i]), 'score': distances[0][i]*100} for i in indices]
 
-		matches = euclidean_distances(job_offer,sparseMatrix)
-
-		indices = (matches[0]).argsort()[:n].tolist()
-		distances = [matches[0][i] for i in indices]
-		scores = [1/(1+matches[0][i]**2)*100 for i in indices]
-
-		result = {'indices':indices, 'distances':distances, 'scores':scores }
+		# normalize(sparseMatrix, axis=1)
+		# indices = (-distances[0]).argsort().tolist()
+		# distances = euclidean_distances(job_offer,sparseMatrix)
+		# result = [{'_id' : str(self.ids[i]), 'score': score(distances[0][i])} for i in indices]
 
 		return(result)
-
-# Resumes = []
-
-# import csv
-# with open('C:\\Users\\Ahmed\\Desktop\\PFE\\Linkedin scraping\\Data.csv', 'r', encoding="ISO-8859-1") as f:
-# 	ereader = csv.DictReader(f)
-# 	for row in ereader:
-# 		Resumes.append(row['skills'])
-
-# tfidf = matcher()
-
-# tfidf.train(Resumes)
-# job_offer_description = "'Java', 'JEE', 'SQL', 'Python', 'machine learning', 'Raspberry Pi', 'c', 'Spring Boot', 'MongoDB', 'Leadership', 'Raspberry', 'Pi'"
-# print(tfidf.top_matches(job_offer_description,5))

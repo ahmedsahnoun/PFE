@@ -8,7 +8,7 @@ const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 const sidebarConfig = [
   {
     title: 'Home',
-    path: '/app',
+    path: '/Homepage',
     icon: getIcon('ant-design:home-outlined')
   },
   // {

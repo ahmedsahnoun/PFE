@@ -16,6 +16,7 @@ UserListHead.propTypes = {
 };
 
 export default function UserListHead({
+  check=true,
   order,
   orderBy,
   rowCount,
@@ -30,7 +31,7 @@ export default function UserListHead({
 
   return (
     <TableHead>
-      <TableRow>
+      <TableRow>{check && (
         <TableCell padding="checkbox">
           <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
@@ -38,6 +39,7 @@ export default function UserListHead({
             onChange={onSelectAllClick}
           />
         </TableCell>
+      )}
         {headLabel.map((headCell,index) => (
           <TableCell
             key={index}

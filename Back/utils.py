@@ -1,5 +1,12 @@
+from math import log,exp
+
 def coef(document,n):
 	return((document+" ")*n)
+
+def score(x):
+	score = (exp(2)-exp(x))/(exp(2)-1)*100
+	# score = (1-x/2)*100
+	return(score)
 
 def get_experience_duration(dates):
 	total_experience_in_months = 0
