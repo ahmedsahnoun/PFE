@@ -70,7 +70,7 @@ def refresh_model():
 	
 	for R in Resumes:
 		# document = coef(str(R['skills']),3)+coef(str(R['experience']),3)+coef(str(R['langs']),1)+coef(str(R['location']),1)
-		document = str(R['skills'])+str(R['experience'])+str(R['langs'])+str(R['location'])
+		document = str(R['skills'])+' '+str(R['experience'])+' '+str(R['langs'])+' '+str(R['location'])
 		cv.append(document)
 		ids.append(str(R['_id']))
 		if R['source'] == 'TALAN':
@@ -94,6 +94,11 @@ def Parse():
 		req = request.json
 		result = DecodeExtract(req)
 		result['document'] = req
+		result['langs'] = ''
+		result['location'] = ''
+		result['source'] = 'pdf'
+		result['experience'] = ' '.join(result['experience'])
+		mongo.db.Resumes.insert_one(result)
 		return {'result': result}
 	except:
 		return {'result': 'fail'}
@@ -104,8 +109,21 @@ def URLScraping():
 		url = request.json
 		ex = extractor()
 		ex.Login()
-		Resume = ex.extract(url)
-		return {'result': Resume}
+		resume = ex.extract(url)
+		if resume['experience']!='':
+			fields = ['position','company','duration','details']
+			try:
+				experience = resume['experience']
+				resume['experience'] = [{fields[i]: e[i] for i in range(4)} for e in experience]
+			except:
+				pass
+		resume['source']='linkedin'
+		mongo.db.Resumes.find_one_and_update({"url": resume['url']}, {"$set":resume}, upsert = True)
+		
+		refresh_model()
+		match_all()
+
+		return {'result': resume}
 	except:
 		return {'result': 'fail'}
 
@@ -125,7 +143,7 @@ def WebScraping():
 				except:
 					pass
 			resume['source']='linkedin'
-			mongo.db.Resumes.insert_one(resume)
+			mongo.db.Resumes.find_one_and_update({"url": resume['url']}, {"$set":resume}, upsert = True)
 
 			refresh_model()
 			match_all()
@@ -221,7 +239,9 @@ def RefreshDB():
 					except:
 						pass
 			try:
-				mongo.db.Resumes.insert_one(resume)
+				resume.pop('')
+				if resume['source'] in ['xing','linkedin','indeed','pjf']:
+					mongo.db.Resumes.insert_one(resume)
 			except:
 				pass
 
@@ -266,6 +286,7 @@ def Resumes():
 		resumes = mongo.db.Resumes.find()
 		for r in resumes:
 			r['_id']=str(r['_id'])
+			r = dict((key,r[key]) for key in ['_id','name','email','url','source'])
 			result.append(r)
 	except:
 		return([])

@@ -8,9 +8,10 @@ function CircularProgressWithLabel(props) {
     <Box sx={{ position: "relative", display: "inline-flex" }}>
       <CircularProgress
         color={
-          (props.value >= 60 && "success") ||
+          (props.value >= 70 && "success") ||
           (props.value >= 50 && "info") ||
-          "warning"
+          (props.value >= 30 && "warning") ||
+          "error"
         }
         variant="determinate"
         {...props}

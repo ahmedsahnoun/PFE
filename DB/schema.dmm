@@ -245,6 +245,20 @@
 					"validate": ""
 				},
 				{
+					"id": "beaccd81-9cad-4c49-a93c-2dd2f316a38d",
+					"name": "document",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
 					"id": "2c5cb952-96ef-4098-b1a5-0f94821f8d3f",
 					"name": "experience",
 					"datatype": "52b9183c-3813-4beb-8fce-4bb34e0c406e",
@@ -697,7 +711,7 @@
 		"def_validationAction": "na",
 		"def_collation": "",
 		"def_others": "",
-		"lastSaved": "Mon May 09 2022 09:10:40 GMT+0100 (GMT+01:00)",
+		"lastSaved": "Mon May 23 2022 15:41:40 GMT+0100 (GMT+01:00)",
 		"writeFileParam": false
 	},
 	"otherObjects": {},
@@ -727,9 +741,9 @@
 				},
 				"f8db035c-f796-42c8-a293-010d3abb064d": {
 					"referencedItemId": "f8db035c-f796-42c8-a293-010d3abb064d",
-					"x": 1120,
-					"y": 260,
-					"gHeight": 313,
+					"x": 1009,
+					"y": 277,
+					"gHeight": 331,
 					"gWidth": 250,
 					"color": "#ffffff",
 					"background": "#03a9f4",
@@ -738,8 +752,8 @@
 				},
 				"3b78d2c0-657e-4fb0-b85a-636d7fe807dd": {
 					"referencedItemId": "3b78d2c0-657e-4fb0-b85a-636d7fe807dd",
-					"x": 566,
-					"y": 316,
+					"x": 455,
+					"y": 333,
 					"gHeight": 222,
 					"gWidth": 245,
 					"color": "#ffffff",
@@ -749,8 +763,8 @@
 				},
 				"112f7d4d-edd1-4523-a189-29e7bea67a5f": {
 					"referencedItemId": "112f7d4d-edd1-4523-a189-29e7bea67a5f",
-					"x": 239,
-					"y": 249,
+					"x": 143,
+					"y": 260,
 					"gHeight": 347,
 					"gWidth": 267,
 					"color": "#ffffff",
@@ -760,8 +774,8 @@
 				},
 				"1c1c6831-371b-4a60-b4b2-159d23386fe2": {
 					"referencedItemId": "1c1c6831-371b-4a60-b4b2-159d23386fe2",
-					"x": 855,
-					"y": 393,
+					"x": 744,
+					"y": 410,
 					"gHeight": 62,
 					"gWidth": 207,
 					"color": "#ffffff",

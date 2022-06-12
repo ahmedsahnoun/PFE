@@ -54,13 +54,17 @@ export default function DashboardApp() {
         })
           .then((res) => {
             if (res.ok) {
-              setSuccess(true);
               let response = res.text();
 
               response.then((res) => {
                 let result = JSON.parse(res)["result"];
                 console.log(result);
-                setbase(result["document"]);
+                if (result !== "fail") {
+                  setSuccess(true);
+                  setbase(result["document"]);
+                } else {
+                  setError(true);
+                }
               });
             } else {
               setError(true);
@@ -101,12 +105,16 @@ export default function DashboardApp() {
     })
       .then((res) => {
         if (res.ok) {
-          setSuccess(true);
           let response = res.text();
 
           response.then((res) => {
             let result = JSON.parse(res)["result"];
             console.log(result);
+            if (result !== "fail") {
+              setSuccess(true);
+            } else {
+              setError(true);
+            }
           });
         } else {
           setError(true);
@@ -126,12 +134,16 @@ export default function DashboardApp() {
     })
       .then((res) => {
         if (res.ok) {
-          setSuccess(true);
           let response = res.text();
 
           response.then((res) => {
             let result = JSON.parse(res)["result"];
             console.log(result);
+            if (result !== "fail") {
+              setSuccess(true);
+            } else {
+              setError(true);
+            }
           });
         } else {
           setError(true);
@@ -268,16 +280,18 @@ export default function DashboardApp() {
               </Grid>
             </Grid>
           </Grid>
-          {base && (<Grid item xs={12} md={6}>
-            <Card sx={{ height: 672, p: 3, boxShadow: 8 }}>
-              <embed
-                width="100%"
-                height="100%"
-                src={"data:application/pdf;base64," + base}
-                type="application/pdf"
-              />
-            </Card>
-          </Grid>)}
+          {base && (
+            <Grid item xs={12} md={6}>
+              <Card sx={{ height: 672, p: 3, boxShadow: 8 }}>
+                <embed
+                  width="100%"
+                  height="100%"
+                  src={"data:application/pdf;base64," + base}
+                  type="application/pdf"
+                />
+              </Card>
+            </Grid>
+          )}
         </Grid>
       </Container>
     </Page>

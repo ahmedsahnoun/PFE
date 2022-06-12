@@ -7,7 +7,6 @@ from spacy.matcher import Matcher
 from spacy_langdetect import LanguageDetector
 from langdetect import detect
 from .extractor import *
-from pathlib import Path
 import base64
 
 class ResumeParser(object):
@@ -82,11 +81,10 @@ def DecodeExtract(req):
 	with open("./Parse/temp.pdf", "wb") as f:
 		f.write(base64.b64decode(req))
 
-	path = Path(__file__).parent / "./temp.pdf"
+	info = ResumeParser("./Parse/temp.pdf").get_details()
 
-	info = ResumeParser(str(path)).get_details()
-
-	if os.path.exists("temp.pdf"):
-		os.remove("temp.pdf")
+	print(os.path)
+	if os.path.exists("./Parse/temp.pdf"):
+		os.remove("./Parse/temp.pdf")
 
 	return(info)

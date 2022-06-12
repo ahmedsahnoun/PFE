@@ -63,13 +63,15 @@ export default function Newproject() {
     })
       .then((res) => {
         if (res.ok) {
-          setSuccess(true);
-
           let response = res.text();
 
           response.then((res) => {
             let result = JSON.parse(res)["result"];
-            console.log(result);
+            if (result !== "fail") {
+              setSuccess(true);
+            } else {
+              setError(true);
+            }
             // if (result !=='fail') {navigate("../Project/"+result, { replace: true })}
           });
         } else {
