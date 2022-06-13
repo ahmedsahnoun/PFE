@@ -29,6 +29,8 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export default function Newproject() {
   // let navigate = useNavigate();
 
+  const [disabler, setDisabler] = useState(false);
+
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -69,6 +71,7 @@ export default function Newproject() {
             let result = JSON.parse(res)["result"];
             if (result !== "fail") {
               setSuccess(true);
+              setDisabler(true);
             } else {
               setError(true);
             }
@@ -223,6 +226,7 @@ export default function Newproject() {
         <JobForm
           hasDelete
           hasConfirm
+          disabled={disabler}
           template={jobs}
           setTemplate={setJobs}
           onSubmit={handleSubmit}

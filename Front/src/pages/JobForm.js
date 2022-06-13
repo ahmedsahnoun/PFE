@@ -59,11 +59,12 @@ export default function JobForm({
     setTemplate(values);
   };
 
-  const confirm = () => {
+  const confirm = (disabler) => {
     return (
       <Container>
         <Grid margin={6} style={{ textAlign: "center" }}>
           <Button
+            disabled = {disabler}
             type="submit"
             size="large"
             variant="contained"
@@ -247,7 +248,7 @@ export default function JobForm({
     <form onSubmit={onSubmit}>
       {renderer({ template })}
       {hasAdd && add()}
-      {hasConfirm && confirm()}
+      {hasConfirm && confirm(disabled)}
     </form>
   );
 }
