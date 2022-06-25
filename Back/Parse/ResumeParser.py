@@ -67,11 +67,11 @@ class ResumeParser(object):
 		return({
 					'name':name,
 					'email':email,
-					'mobile':mobile,
+					'phone':mobile,
 					'url':url,
 					'skills':skills,
 					'experience':experience,
-					'education':education,
+					'school':education,
 					})
 
 	def details(self):

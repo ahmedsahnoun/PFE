@@ -93,12 +93,14 @@ def Parse():
 	try:
 		req = request.json
 		result = DecodeExtract(req)
-		result['document'] = req
 		result['langs'] = ''
+		result['company'] = ''
 		result['location'] = ''
 		result['source'] = 'pdf'
+		result['school'] = result['school'][0] or ''
 		result['experience'] = ' '.join(result['experience'])
-		mongo.db.Resumes.insert_one(result)
+		result['document'] = req
+		mongo.db.Resumes.find_one_and_update({"url": result['url']}, {"$set":result}, upsert = True)
 		return {'result': result}
 	except:
 		return {'result': 'fail'}
