@@ -1,4 +1,4 @@
-# EPOS_Converter
+# PFE
 This project is the focus of our end of studies internship conducted in order to obtain our
 computer science engineering degree. This internship was realized within Talan Tunisia, an
 engineering consulting company.
