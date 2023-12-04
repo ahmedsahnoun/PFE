@@ -1,5 +1,5 @@
-linkedin_username = 'salma_tounsi2022@outlook.fr'
-linkedin_password = 'YR_@Z3NZ+Sp&wxe'
+linkedin_username = 'Insert'
+linkedin_password = 'Insert'
 
 searchPath='//*[@id="global-nav-typeahead"]/input'
 
